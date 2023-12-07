@@ -1,0 +1,11 @@
+<svg id="Component_43_1" data-name="Component 43 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26.625" height="29.746" viewBox="0 0 26.625 29.746">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#ef4747"/>
+      <stop offset="1" stop-color="#cf0000"/>
+    </linearGradient>
+  </defs>
+  <path id="Path_4700" data-name="Path 4700" d="M192.653,199.893a.782.782,0,0,0-.678-.393h-5.417a.782.782,0,0,0-.676,1.177,3.909,3.909,0,0,0,6.77,0A.781.781,0,0,0,192.653,199.893Z" transform="translate(-175.954 -172.885)" fill="url(#linear-gradient)"/>
+  <path id="Path_4701" data-name="Path 4701" d="M206.052,207.111a.807.807,0,0,1-.72.438h-25.05a.779.779,0,0,1-.611-1.268,14.874,14.874,0,0,0,2.975-8.126v-5.145a10.417,10.417,0,0,1,7.772-10.23,10.227,10.227,0,0,1,5.267.133.475.475,0,0,1,.24.715,5.43,5.43,0,0,0-.7,3.643,5.535,5.535,0,0,0,5.455,4.62,5.37,5.37,0,0,0,1.667-.272.44.44,0,0,1,.4.048.49.49,0,0,1,.224.377c.012.208.02.416.02.629v5.48a14.875,14.875,0,0,0,2.975,8.126A.794.794,0,0,1,206.052,207.111Z" transform="translate(-179.502 -182.5)" fill="url(#linear-gradient)"/>
+  <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="3.131" cy="3.131" rx="3.131" ry="3.131" transform="translate(18.002 0.783)" fill="url(#linear-gradient)"/>
+</svg>
