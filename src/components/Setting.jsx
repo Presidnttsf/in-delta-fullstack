@@ -90,32 +90,32 @@ export default function Setting() {
                         <h3 className="dash-heading py-3">Interested Categories</h3>
                         <p>Lorem ipsum is simple dummy text that can be used that can be</p>
                         <div className="row interested-categories mt-4 text-center">
-                            <div className="col-lg-3">
+                            <div className="col-lg-4">
                                 <div className="interesteimages mx-auto">
                                     <input type="checkbox" id="myCheckbox1" />
                                     <label htmlFor="myCheckbox1">
                                         <img src="images/category/category1.png" />
                                     </label>
                                 </div>
-                                <p className="cat-text pt-2">category</p>
+                                <p className="cat-text pt-2">category1</p>
                             </div>
-                            <div className="col-lg-3">
+                            <div className="col-lg-4">
                                 <div className="interesteimages mx-auto">
                                     <input type="checkbox" id="myCheckbox2" />
                                     <label htmlFor="myCheckbox2">
                                         <img src="images/category/category1.png" />
                                     </label>
                                 </div>
-                                <p className="cat-text pt-2">category</p>
+                                <p className="cat-text pt-2">category2</p>
                             </div>
-                            <div className="col-lg-3">
+                            <div className="col-lg-4">
                                 <div className="interesteimages mx-auto">
                                     <input type="checkbox" id="myCheckbox3" />
                                     <label htmlFor="myCheckbox3">
                                         <img src="images/category/category1.png" />
                                     </label>
                                 </div>
-                                <p className="cat-text pt-2">category</p>
+                                <p className="cat-text pt-2">category3</p>
                             </div>
                         </div>
                         <p className="mt-4 select-text">
