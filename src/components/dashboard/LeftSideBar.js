@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 
 export default function LeftSideBar() {
@@ -21,22 +22,26 @@ export default function LeftSideBar() {
                 <div className="sidebar-tab pt-5">
                     <ul>
                         <li className="nav-link mb-4 active">
-                            <a href="dashboard.html" className="d-flex">
+                            <Link to="/" className="d-flex">
                                 <div className="dash-icon"><img src="images/side-bar/dashboard-icon.svg" alt="Dashboard" className="pe-2" /></div>
                                 <div className="dash-title"><h6>Dashboard</h6></div>
-                            </a>
+                            </Link>
                         </li>
                         <li className="nav-link mb-4">
-                            <a href="my-program.html" className="d-flex">
+                            <Link to="/myprogram" className="d-flex">
+
                                 <div className="dash-icon"><img src="images/side-bar/my-programs-icon.svg" alt="My Programs" className="pe-2" /></div>
                                 <div className="dash-title"><h6>My Programs</h6></div>
-                            </a>
+
+                            </Link>
                         </li>
                         <li className="nav-link mb-4">
-                            <a href="setting.html" className="d-flex">
+                            <Link to="/setting" className="d-flex">
+
                                 <div className="dash-icon"><img src="images/side-bar/setting-icon.svg" alt="Settings" className="pe-2" /></div>
                                 <div className="dash-title"><h6>Settings</h6></div>
-                            </a>
+
+                            </Link>
                         </li>
                     </ul>
                 </div>

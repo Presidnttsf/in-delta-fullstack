@@ -11,7 +11,7 @@ export default function Dashboard() {
     return (
         <div>
             <div>
-                <Header />
+                {/* <Header /> */}
                 <Search />
                 <PopularCatogories />
                 <ExplorePrograms />
