@@ -31,8 +31,8 @@ function App() {
   }
   return (
     <>
-      {/* {authenticate ? <Home /> : <Login handleLogin={handleLogin} />} */}
-      <Home />
+      {authenticate ? <Home /> : <Login handleLogin={handleLogin} />}
+
 
     </>
   );
