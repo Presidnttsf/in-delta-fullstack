@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom';
 
 export default function Setting({ handlePathChange }) {
     useEffect(() => {
@@ -21,21 +22,22 @@ export default function Setting({ handlePathChange }) {
                                     </a>
                                 </li>
                                 <li className="pb-5">
-                                    <a href="change-password.html">
+                                    <Link to="/changepassword" >
                                         <i className="fa-solid fa-lock px-3" />
                                         <span>Change Password</span>
-                                    </a>
+                                    </Link>
                                 </li>
                                 <li className="pb-5">
-                                    <a href="manage-card.html">
+                                    <Link to="/managecard" >
                                         <i className="fa-solid fa-lock px-3" />
                                         <span>Manage Card</span>
-                                    </a>
+                                    </Link>
+
                                 </li>
                                 <li className="pb-5">
                                     <a href="notification.html">
                                         <i className="fa-solid fa-lock px-3" />
-                                        <span>Notification</span>
+                                        <span>Notification settings</span>
                                     </a>
                                 </li>
                             </ul>
@@ -67,7 +69,7 @@ export default function Setting({ handlePathChange }) {
                                 </div>
                                 <div className="log-group-icon">
                                     <img
-                                        src="images/log-profile.svg"
+                                        src="images/editPic.svg"
                                         className="img-fluid"
                                     />
                                 </div>
