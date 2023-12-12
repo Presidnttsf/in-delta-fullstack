@@ -561,17 +561,23 @@ h6 {
     font-size: 15px;
 }
 
-.setting-left-pannel-inner ul li a {
+.setting-left-pannel-inner ul li button {
     color: #b3b3b3;
     display: block;
+    font-size: 10px;
+    border: none;
+    background: none;
+    text-align: start;
+    width: 100%;
 }
 
-.setting-left-pannel-inner ul li a.active {
+.setting-left-pannel-inner ul li button.active {
     color: #cf0000;
     position: relative;
+
 }
 
-.setting-left-pannel-inner ul li a.active::after {
+.setting-left-pannel-inner ul li button.active::after {
     position: absolute;
     content: '';
     background-color: #cf0000;

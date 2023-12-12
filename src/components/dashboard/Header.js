@@ -13,7 +13,16 @@ export default function Header(props) {
                 setHeader("My Program");
                 break;
             case "/setting":
-                setHeader("Setting");
+                setHeader("My Settings");
+                break;
+            case "/managecard":
+                setHeader("My Settings");
+                break;
+            case "/changepassword":
+                setHeader("My Settings");
+                break;
+            case "/notificationsettings":
+                setHeader("My Settings");
                 break;
             default:
                 setHeader("");
@@ -21,8 +30,8 @@ export default function Header(props) {
         }
     }, [props.heading]);
     return (
-
         <>
+
 
             <div className="col-md-6 wrapper-header-left pt-4">
                 <h2>{header}</h2>
@@ -248,8 +257,8 @@ export default function Header(props) {
 
 
 
-
         </>
+
 
     )
 }
