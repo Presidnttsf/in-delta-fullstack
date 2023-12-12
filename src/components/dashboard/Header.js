@@ -21,7 +21,9 @@ export default function Header(props) {
             case "/changepassword":
                 setHeader("My Settings");
                 break;
-
+            case "/notificationsettings":
+                setHeader("My Settings");
+                break;
             default:
                 setHeader("");
                 break;

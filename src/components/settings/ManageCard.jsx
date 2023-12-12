@@ -1,46 +1,12 @@
 import React, { useEffect } from 'react'
+import SettingsLeftBar from './SettingsLeftBar';
 
-export default function ManageCard({ handlePathChange }) {
-
-    useEffect(() => {
-        // Call handlePathChange with the current path when the component mounts
-        handlePathChange(window.location.pathname);
-    }, []);
+export default function ManageCard() {
 
 
     return (
         <div className="row edit-profile-row">
             <div className="edit-profile-main d-flex">
-                <div className="setting-left-pannel d-none d-md-block">
-                    <div className="setting-left-pannel-inner py-5 ps-5">
-                        <ul className="pt-lg-5">
-                            <li className="pb-5">
-                                <a href="setting.html" className="active">
-                                    <i className="fa-solid fa-user-pen px-3" />
-                                    <span>Edit Profile</span>
-                                </a>
-                            </li>
-                            <li className="pb-5">
-                                <a href="change-password.html">
-                                    <i className="fa-solid fa-lock px-3" />
-                                    <span>Change Password</span>
-                                </a>
-                            </li>
-                            <li className="pb-5">
-                                <a href="manage-card.html">
-                                    <i className="fa-brands fa-cc-visa px-3" />
-                                    <span>Manage Card</span>
-                                </a>
-                            </li>
-                            <li className="pb-5">
-                                <a href="notification.html">
-                                    <i className="fa-solid fa-lock px-3" />
-                                    <span>Notification setting</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
                 <div className="setting-right-pannel-inner row">
                     {/* Setting_heading */}
                     <div className="setting-heading pt-5 ps-5">

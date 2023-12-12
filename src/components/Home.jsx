@@ -12,6 +12,7 @@ import Header from './dashboard/Header';
 import { useState } from 'react';
 import ManageCard from './settings/ManageCard';
 import ChangePassword from './settings/ChangePassword';
+import NotificationSettings from './settings/NotificationSettings';
 
 
 function Home() {
@@ -39,8 +40,6 @@ function Home() {
                             <Route path="/" exact element={<Dashboard handlePathChange={handlePathChange} />} />
                             <Route path="/myprogram" element={<MyProgram handlePathChange={handlePathChange} />} />
                             <Route path="/setting" element={<Setting handlePathChange={handlePathChange} />} />
-                            <Route path="/managecard" element={<ManageCard handlePathChange={handlePathChange} />} />
-                            <Route path="/changepassword" element={<ChangePassword handlePathChange={handlePathChange} />} />
 
                         </Routes>
                         <Footer />
