@@ -25,7 +25,7 @@ export default function Setting({ handlePathChange }) {
             <div className="row edit-profile-row mt-5 pb-5">
                 <div className="edit-profile-main d-flex">
                     <div className="setting-left-pannel">
-                        <SettingsLeftBar handleTabClick={(tab) => handleTabClick(tab)} />
+                        <SettingsLeftBar handleTabClick={(tab) => handleTabClick(tab)} activeTab={activeTab} />
                     </div>
 
 

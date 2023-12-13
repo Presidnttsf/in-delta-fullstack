@@ -4,6 +4,9 @@ import { Link } from 'react-router-dom';
 
 export default function LeftSideBar() {
 
+    let pathName = window.location.pathname;
+    console.log("pathName", pathName)
+
 
     return (
         <div className="sidebar px-5 d-none d-md-block">
@@ -23,13 +26,13 @@ export default function LeftSideBar() {
 
                 <div className="sidebar-tab pt-5">
                     <ul>
-                        <li className="nav-link mb-4 active">
+                        <li className={`nav-link mb-4 ${pathName === "/" ? "active" : ""}`}>
                             <Link to="/" className="d-flex">
                                 <div className="dash-icon"><img src="images/side-bar/dashboard-icon.svg" alt="Dashboard" className="pe-2" /></div>
                                 <div className="dash-title"><h6>Dashboard</h6></div>
                             </Link>
                         </li>
-                        <li className="nav-link mb-4">
+                        <li className={`nav-link mb-4 ${pathName === "/myprogram" ? "active" : ""}`}>
                             <Link to="/myprogram" className="d-flex">
 
                                 <div className="dash-icon"><img src="images/side-bar/my-programs-icon.svg" alt="My Programs" className="pe-2" /></div>
@@ -37,7 +40,7 @@ export default function LeftSideBar() {
 
                             </Link>
                         </li>
-                        <li className="nav-link mb-4">
+                        <li className={`nav-link mb-4 ${pathName === "/setting" ? "active" : ""}`}>
                             <Link to="/setting" className="d-flex">
 
                                 <div className="dash-icon"><img src="images/side-bar/setting-icon.svg" alt="Settings" className="pe-2" /></div>
