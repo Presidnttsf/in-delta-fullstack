@@ -13,6 +13,7 @@ import { useState } from 'react';
 import ManageCard from './settings/ManageCard';
 import ChangePassword from './settings/ChangePassword';
 import NotificationSettings from './settings/NotificationSettings';
+import Faq from './dashboard/Faq';
 
 
 function Home() {
@@ -40,7 +41,7 @@ function Home() {
                             <Route path="/" exact element={<Dashboard handlePathChange={handlePathChange} />} />
                             <Route path="/myprogram" element={<MyProgram handlePathChange={handlePathChange} />} />
                             <Route path="/setting" element={<Setting handlePathChange={handlePathChange} />} />
-
+                            <Route path="/faq" element={<Faq handlePathChange={handlePathChange} />} />
                         </Routes>
                         <Footer />
                     </div>

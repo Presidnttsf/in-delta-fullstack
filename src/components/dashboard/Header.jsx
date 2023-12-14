@@ -1,48 +1,69 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function Header(props) {
     console.log("header props", props)
     const [header, setHeader] = useState('');
+    const [faq, setFaq] = useState(false);
+    const history = useNavigate();
+
+    const handleGoBack = () => {
+        history(-1);
+    };
 
     useEffect(() => {
         switch (props.heading) {
             case "/":
                 setHeader("Dashboard");
+                setFaq(false)
                 break;
             case "/myprogram":
                 setHeader("My Program");
+                setFaq(false)
                 break;
             case "/setting":
                 setHeader("My Settings");
+                setFaq(false)
                 break;
             case "/managecard":
                 setHeader("My Settings");
+                setFaq(false)
                 break;
             case "/changepassword":
                 setHeader("My Settings");
+                setFaq(false)
                 break;
             case "/notificationsettings":
                 setHeader("My Settings");
+                setFaq(false)
+                break;
+            case "/faq":
+                setFaq(true);
                 break;
             default:
                 setHeader("");
                 break;
         }
     }, [props.heading]);
+
     return (
         <>
 
-
             <div className="col-md-6 wrapper-header-left pt-4">
-                <h2>{header}</h2>
-                <p>Lorem ipsum is simple dummy text of the printing and type setting industry.</p>
+                {faq === true ? <div className="col-md-6 wrapper-header-left pt-4">
+                    <div className="back-button">
+                        <a onClick={handleGoBack}><img src="images/back-button.svg" /><span
+                            className="back-button-text ms-2">Back</span></a>
+                    </div>
+                </div> : (
+                    <>
+                        <h2>{header}</h2>
+                        <p>Lorem ipsum is simple dummy text of the printing and typesetting industry.</p>
+                    </>
+                )}
+
             </div>
-            <div className="col-md-6 wrapper-header-left d-none pt-4">
-                <div className="back-button">
-                    <a href="#"><img src="images/back-button.svg" /><span
-                        className="back-button-text ms-2">Back</span></a>
-                </div>
-            </div>
+
 
             <div className="col-md-6 wrapper-header-right pt-4 d-flex justify-content-lg-end">
                 <nav className="navbar navbar-expand-md navbar-light pe-4">
@@ -76,47 +97,6 @@ export default function Header(props) {
                                         <p className="admin-mail">john.doe@gmail.com</p>
                                     </div>
                                 </div>
-
-                                {/* <div className="sidebar-tab pt-5">
-                                        <div className="nav flex-column nav-pills me-4" id="v-pills-tab"
-                                            role="tablist" aria-orientation="vertical">
-                                            <button className="nav-link mb-3 active" id="v-pills-home-tab"
-                                                data-bs-toggle="pill" data-bs-target="#v-pills-home"
-                                                type="button" role="tab" aria-controls="v-pills-home"
-                                                aria-selected="true">
-                                                <img src="images/side-bar/dashboard-icon.svg"
-                                                    alt="Dashbord" className="pe-2" />
-                                                <h6>Dashbord</h6>
-                                            </button>
-
-                                            <button className="nav-link mb-3" id="v-pills-profile-tab"
-                                                data-bs-toggle="pill" data-bs-target="#v-pills-profile"
-                                                type="button" role="tab" aria-controls="v-pills-profile"
-                                                aria-selected="false">
-                                                <img src="images/side-bar/my-programs-icon.svg"
-                                                    alt="Dashbord" className="pe-2" />
-                                                <h6>My Programs</h6>
-                                            </button>
-
-                                            <button className="nav-link mb-3" id="v-pills-messages-tab"
-                                                data-bs-toggle="pill" data-bs-target="#v-pills-messages"
-                                                type="button" role="tab" aria-controls="v-pills-messages"
-                                                aria-selected="false">
-                                                <img src="images/side-bar/setting-icon.svg"
-                                                    alt="Dashbord" className="pe-2" />
-                                                <h6>Settings</h6>
-                                            </button>
-                                        </div>
-                                    </div> */}
-
-                                {/* <nav className="sidebar-menu pt-4 pb-5 ps-3">
-                                        <ul>
-                                            <li><a href="#">About Us</a></li>
-                                            <li><a href="#">How it Works</a></li>
-                                            <li><a href="#">Resources and articles</a></li>
-                                            <li><a href="login.html">Logout</a></li>
-                                        </ul>
-                                    </nav> */}
 
                             </div>
                         </div>
@@ -207,7 +187,7 @@ export default function Header(props) {
                 </div>
                 {/* <!-- question --> */}
                 <div className="question">
-                    <a href="faq.html"><img src="images/question-mark.svg" className="question-img" /></a>
+                    <Link to="/faq"><img src="images/question-mark.svg" className="question-img" /></Link>
                 </div>
                 {/* <!-- admin-profile --> */}
                 <div className="admin-profile ps-5">
