@@ -5,10 +5,10 @@ export default function Header(props) {
     console.log("header props", props)
     const [header, setHeader] = useState('');
     const [faq, setFaq] = useState(false);
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     const handleGoBack = () => {
-        history(-1);
+        navigate(-1);
     };
 
     useEffect(() => {
