@@ -1,6 +1,38 @@
 import React from 'react'
+import { isAuthenticated } from './auth';
 
-export default function Login({ handleLogin }) {
+export default function Login({ navigate }) {
+
+    const handleLogin = (event) => {
+        event.preventDefault();
+
+        const user = {
+            email: event.target.querySelector('[name="email"]').value,
+            password: event.target.querySelector('[name="cvv"]').value,
+        };
+
+        if (isAuthenticated()) {
+            // User is already authenticated, handle accordingly (e.g., redirect to home)
+            navigate("/");
+        } else {
+            // User is not authenticated, perform authentication logic
+            // For simplicity, let's assume a basic authentication check
+            const isValidUser = user.email === "presidnttsf@gmail.com" && user.password === "123";
+
+            if (isValidUser) {
+                // Authentication successful, store user info and redirect
+                localStorage.setItem("user", JSON.stringify(user));
+                navigate("/");
+            } else {
+                // Authentication failed, show error or take appropriate action
+                alert("Invalid username and password");
+            }
+        }
+    };
+
+
+
+
     return (
 
         <div className="main-log login-page">
@@ -10,12 +42,13 @@ export default function Login({ handleLogin }) {
                         <div className="log-left pe-lg-5">
                             <img
                                 src="images/login-bg.png"
-                                className="img-fluid log-bg-img"
+                                className="img-fluid log-bg-img" alt="login"
                             />
                             <div className="login-logo">
                                 <img
                                     src="images/log-logo.svg"
                                     className="img-fluid log-logo"
+                                    alt='logo'
                                 />
                             </div>
                         </div>
@@ -32,6 +65,7 @@ export default function Login({ handleLogin }) {
                                     <div className="log-group-input">
                                         <input
                                             type="email"
+                                            name="email"
                                             id="email"
                                             placeholder="john.doe@gmail.com"
                                         />
@@ -40,6 +74,7 @@ export default function Login({ handleLogin }) {
                                         <img
                                             src="images/log-msg-icon.svg"
                                             className="img-fluid"
+                                            alt='logo'
                                         />
                                     </div>
                                 </div>
@@ -47,7 +82,7 @@ export default function Login({ handleLogin }) {
                                 <div className="log-group ms-2">
                                     <div className="log-group-input">
                                         <input
-                                            type="text"
+                                            type="password"
                                             name="cvv"
                                             id="cvv"
                                             placeholder="**********"
@@ -58,6 +93,7 @@ export default function Login({ handleLogin }) {
                                         <img
                                             src="images/log-pass-icon.svg"
                                             className="img-fluid"
+                                            alt='logo'
                                         />
                                     </div>
                                 </div>
@@ -69,7 +105,7 @@ export default function Login({ handleLogin }) {
                                         <span className="check-text-101 ps-2">Keep me logged in</span>
                                     </label>
                                     <div className="log-forgot ms-auto">
-                                        <a href="forget-password.html" className="log-forgot-text">
+                                        <a to="/forgetpassword" className="log-forgot-text">
                                             Forgot Password
                                         </a>
                                     </div>
@@ -92,6 +128,7 @@ export default function Login({ handleLogin }) {
                                         <img
                                             src="images/login/log_google.png"
                                             className="img-fluid log-social-img"
+                                            alt='logo'
                                         />
                                     </div>
                                     <div className="log-social-icon px-3">
@@ -104,6 +141,7 @@ export default function Login({ handleLogin }) {
                                         <img
                                             src="images/login/log_apple.png"
                                             className="img-fluid log-social-img"
+                                            alt='logo'
                                         />
                                     </div>
                                 </div>
@@ -121,6 +159,7 @@ export default function Login({ handleLogin }) {
             <img
                 src="images/login-bg/loging-right-shape.svg"
                 className="img-fluid log-bottom-bg"
+                alt='logo'
             />
             <div className="log-container">
                 <div className="row">

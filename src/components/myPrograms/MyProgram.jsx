@@ -5,7 +5,7 @@ export default function MyProgram({ handlePathChange }) {
     useEffect(() => {
         // Call handlePathChange with the current path when the component mounts
         handlePathChange(window.location.pathname);
-    }, []);
+    }, [handlePathChange]);
 
     return (
         <>

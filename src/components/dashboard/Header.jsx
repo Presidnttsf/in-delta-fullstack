@@ -1,11 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { isAuthenticated } from '../login/auth';
 
 export default function Header(props) {
-    console.log("header props", props)
+    // console.log("header props", props)
     const [header, setHeader] = useState('');
     const [faq, setFaq] = useState(false);
     const navigate = useNavigate();
+
+    const handleLogOut = () => {
+        console.log("log out clicked", isAuthenticated.token)
+        localStorage.removeItem("user");
+        // isAuthenticated.token = false;
+        window.location.href = '/';
+
+    }
 
     const handleGoBack = () => {
         navigate(-1);
@@ -222,7 +231,7 @@ export default function Header(props) {
                                             Setting</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" href="#"><img src="images/logout.svg"
+                                        <a className="nav-link" onClick={() => handleLogOut()}><img src="images/logout.svg"
                                             className="img-fluid logout-icon pe-3" />Logout</a>
                                     </li>
                                 </ul>

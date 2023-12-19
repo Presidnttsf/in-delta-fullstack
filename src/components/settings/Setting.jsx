@@ -10,14 +10,14 @@ export default function Setting({ handlePathChange }) {
     const [activeTab, setActiveTab] = useState("editprofile");
 
     const handleTabClick = (tab) => {
-        console.log(tab)
+        // console.log(tab)
         setActiveTab(tab);
     }
 
     useEffect(() => {
         // Call handlePathChange with the current path when the component mounts
         handlePathChange(window.location.pathname);
-    }, []);
+    }, [handlePathChange]);
 
     return (
         <>

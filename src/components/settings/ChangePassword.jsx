@@ -1,6 +1,4 @@
-import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom';
-import SettingsLeftBar from './SettingsLeftBar';
+import React from 'react'
 
 export default function ChangePassword() {
 

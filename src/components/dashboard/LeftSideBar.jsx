@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function LeftSideBar() {
 
     let pathName = window.location.pathname;
-    console.log("pathName", pathName)
+    // console.log("pathName", pathName)
 
 
     return (
