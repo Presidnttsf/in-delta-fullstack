@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { isAuthenticated } from '../login/auth';
+import Modal from './Modal';
 
 export default function Header(props) {
     // console.log("header props", props)
@@ -12,7 +13,8 @@ export default function Header(props) {
         console.log("log out clicked", isAuthenticated.token)
         localStorage.removeItem("user");
         // isAuthenticated.token = false;
-        window.location.href = '/';
+        // window.location.href = '/';
+        navigate("/");
 
     }
 
@@ -22,7 +24,7 @@ export default function Header(props) {
 
     useEffect(() => {
         switch (props.heading) {
-            case "/":
+            case "/dashboard":
                 setHeader("Dashboard");
                 setFaq(false)
                 break;
@@ -192,6 +194,7 @@ export default function Header(props) {
                                 </div>
                             </div>
                         </div>
+                        {/* <Modal /> */}
                     </div>
                 </div>
                 {/* <!-- question --> */}

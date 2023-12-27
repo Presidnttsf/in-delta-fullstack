@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react'
-import SettingsLeftBar from './SettingsLeftBar';
+import React from 'react'
 
 export default function NotificationSettings() {
 

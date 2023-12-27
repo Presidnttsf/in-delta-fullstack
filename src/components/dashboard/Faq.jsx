@@ -1,15 +1,24 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
+import Layout from './Layout';
+import ChatWithSupport from '../ChatWithSupport';
+
 
 export default function Faq({ handlePathChange }) {
+
+    const [show, setShow] = useState(false);
 
     useEffect(() => {
         // Call handlePathChange with the current path when the component mounts
         handlePathChange(window.location.pathname);
     }, []);
+    const handleClick = () => {
 
+        setShow(!show)
+        console.log('chat with support clicked')
+    }
 
     return (
-        <>
+        <Layout currentPath="/faq">
 
             {/* sub-heading */}
             <div className="sub-heading pt-5 d-flex align-items-center justify-content-between">
@@ -19,7 +28,8 @@ export default function Faq({ handlePathChange }) {
                         src="images/chat-support.svg"
                         className="img-fluid chat-support-icon"
                     />
-                    <h6 className="chat-support-text ps-3">Chat with Support</h6>
+                    <h6 onClick={handleClick} className="chat-support-text ps-3">Chat with Support</h6>
+                    <ChatWithSupport visible={show} />
                 </div>
             </div>
             {/* accordian */}
@@ -96,6 +106,6 @@ export default function Faq({ handlePathChange }) {
                     </div>
                 </div>
             </div>
-        </>
+        </Layout>
     )
 }

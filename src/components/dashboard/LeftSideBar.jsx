@@ -26,8 +26,8 @@ export default function LeftSideBar() {
 
                 <div className="sidebar-tab pt-5">
                     <ul>
-                        <li className={`nav-link mb-4 ${pathName === "/" ? "active" : ""}`}>
-                            <Link to="/" className="d-flex">
+                        <li className={`nav-link mb-4 ${pathName === "/dashboard" ? "active" : ""}`}>
+                            <Link to="/dashboard" className="d-flex">
                                 <div className="dash-icon"><img src="images/side-bar/dashboard-icon.svg" alt="Dashboard" className="pe-2" /></div>
                                 <div className="dash-title"><h6>Dashboard</h6></div>
                             </Link>
