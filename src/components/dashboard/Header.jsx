@@ -120,7 +120,7 @@ export default function Header(props) {
                         <a href="#" className="bell-icon" data-bs-toggle="modal"
                             data-bs-target="#exampleModal7"><img src="images/bell-icon.svg" /></a>
                         {/* <!-- Modal --> */}
-                        <div className="modal fade" id="exampleModal7" tabindex="-1"
+                        <div className="modal fade" id="exampleModal7" tabIndex="-1"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div className="modal-dialog modal-dialog modal-dialog-centered">
                                 <div className="modal-content p-4">
