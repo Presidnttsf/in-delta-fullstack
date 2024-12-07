@@ -92,7 +92,7 @@ export default function Login() {
                                 <div className="log-right ps-lg-5">
                                     <h3 className="log-heading pb-3">Log In to Your Account</h3>
                                     <h6 className="log-para pb-5">
-                                        Lorem Ipsom is simple dummy text that be used that can be
+                                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Officia id hpihoi hoioiboijb
                                     </h6>
                                     {/* Mail */}
                                     <div className="log-group">
@@ -200,7 +200,7 @@ export default function Login() {
                         <div className="col-lg-8" />
                         <div className="col-lg-4">
                             <p className="footer-copyright py-3 text-center">
-                                Indelta International © Copyright 2022
+                                Indelta International © Copyright 2022 This website is made by <strong>Mr. Tauseef Akhtar</strong>
                             </p>
                         </div>
                     </div>
