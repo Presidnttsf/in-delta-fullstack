@@ -200,7 +200,7 @@ export default function Login() {
                         <div className="col-lg-8" />
                         <div className="col-lg-4">
                             <p className="footer-copyright py-3 text-center">
-                                Indelta International © Copyright 2022 This website is made by <strong>Mr. Tauseef Akhtar</strong>
+                                Indelta International © Copyright 2023 This website is made by <strong>Mr. Tauseef Akhtar</strong>
                             </p>
                         </div>
                     </div>
