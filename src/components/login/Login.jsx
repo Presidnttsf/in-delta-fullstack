@@ -15,6 +15,7 @@ export default function Login() {
         if (isAuthenticated()) {
             // User is already authenticated, handle accordingly (e.g., redirect to home)
             navigate("/dashboard")
+
         }
 
     }, []
@@ -65,6 +66,11 @@ export default function Login() {
         setShowModal(false);
     };
 
+    function handleCreate() {
+        navigate("/signup"); // Redirect to the signup page
+
+    }
+
 
     return (
         <>
@@ -78,12 +84,17 @@ export default function Login() {
                                     src="images/login-bg.png"
                                     className="img-fluid log-bg-img" alt="login"
                                 />
+
                                 <div className="login-logo">
                                     <img
                                         src="images/log-logo.svg"
                                         className="img-fluid log-logo"
                                         alt='logo'
-                                    />
+                                    /> <br />
+
+                                    <a href=""> <strong style={{ color: "red", fontSize: "large", opacity: "20%" }}>
+                                        Tauseef Akhtar                                     </strong>
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -129,6 +140,7 @@ export default function Login() {
                                                 className="img-fluid"
                                                 alt='logo'
                                             />
+
                                         </div>
                                     </div>
                                     {/* keep-me-login */}
@@ -181,9 +193,8 @@ export default function Login() {
                                     </div>
                                     {/* create-an-acc */}
                                     <div className="create-account text-center pt-4">
-                                        <a href="create-account.html">
-                                            Not registered yet? <span>Creare an Account</span>
-                                        </a>
+                                        Not registered yet? <span onClick={handleCreate}>Create an Account</span>
+
                                     </div>
                                 </div>
                             </form>

@@ -1,5 +1,6 @@
 import './App.css';
 import Login from './components/login/Login';
+import SignUp from './components/login/SignUp';
 import React, { useState } from 'react';
 import LeftSideBar from './components/dashboard/LeftSideBar';
 import Footer from './components/dashboard/Footer';
@@ -26,6 +27,8 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
+
         <Route
           path="/dashboard/*"
           element={

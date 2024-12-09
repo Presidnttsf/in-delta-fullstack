@@ -1065,6 +1065,11 @@ h6 {
 .create-account span {
     color: var(--red);
     text-decoration: underline !important;
+    font-size: 120%;
+}
+
+.create-account:hover span {
+    cursor: pointer;
 }
 
 /********** OTP Varification **********
