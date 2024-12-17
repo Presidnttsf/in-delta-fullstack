@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function Modal(props) {
-    console.log("checking modal props:", props)
+    // console.log("checking modal props:", props)
     if (!props.visible) {
         return null;
     } else {

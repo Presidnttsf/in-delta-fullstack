@@ -8,68 +8,72 @@ export default function Login() {
 
     const [showModal, setShowModal] = useState(false);
     const [message, setMessage] = useState("");
-
     const navigate = useNavigate();
-    console.log("navigate check", navigate)
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+
+    });
+    const user = JSON.parse(localStorage.getItem("user"));
     useEffect(() => {
-        if (isAuthenticated()) {
-            // User is already authenticated, handle accordingly (e.g., redirect to home)
-            navigate("/dashboard")
-
+        console.log("Checking authentication...", user);
+        const authenticated = isAuthenticated();
+        if (authenticated) {
+            console.log("Is authenticated:", authenticated);
+            // navigate("/"); // Redirect if authenticated
         }
+    }, [navigate]);
 
-    }, []
-
-
-    )
-
-    let user;
-    const handleLogin = (event) => {
-        event.preventDefault();
-
-        user = {
-            email: event.target.querySelector('[name="email"]').value,
-            password: event.target.querySelector('[name="cvv"]').value,
-        };
-
-
-        // User is not authenticated, perform authentication logic
-        // For simplicity, let's assume a basic authentication check
-        const isValidUser = user.email === "presidnttsf@gmail.com" && user.password === "123";
-
-        if (isValidUser) {
-            // Authentication successful, store user info and redirect
-            localStorage.setItem("user", JSON.stringify(user));
-            navigate("/dashboard")
-            setShowModal(false);
-        } else if (user.email === '') {
-            // Authentication failed, show error or take appropriate action
-
-            setShowModal(true);
-            setMessage("Email cannot be empty!!!!");
-
-
-        } else if (user.password === '') {
-            setShowModal(true);
-            setMessage("Password cannot be empty!!!!");
-
-        } else {
-            // alert("Invalid credentials")
-            setShowModal(true);
-            setMessage("Invalid Credentials !!!!");
-        }
-        // console.log("showModal:", showModal);
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
+
+    const handleLogin = (event) => {
+        event.preventDefault();
+        const { email, password } = formData;
+
+        if (!email) {
+            setMessage("Email cannot be empty!");
+            setShowModal(true);
+            return;
+        }
+
+        if (!password) {
+            setMessage("Password cannot be empty!");
+            setShowModal(true);
+            return;
+        }
+
+        if (!user) {
+            setMessage("No user found. Please create an account!");
+            setShowModal(true);
+            return;
+        }
+
+
+
+        if (email === user.email && password === user.password) {
+            setMessage("Login successful!");
+            setShowModal(true);
+            localStorage.setItem("loggedin", "true");
+            navigate("/dashboard");
+        } else {
+            setMessage("Invalid credentials!");
+            setShowModal(true);
+        }
+    };
+
+
+
     const closeModal = () => {
-        // Close the modal
         setShowModal(false);
     };
 
-    function handleCreate() {
-        navigate("/signup"); // Redirect to the signup page
-
-    }
+    const handleCreate = () => {
+        navigate("/signup"); // Redirect to signup
+    };
 
 
     return (
@@ -99,7 +103,7 @@ export default function Login() {
                             </div>
                         </div>
                         <div className="col-lg-4">
-                            <form onSubmit={(event) => handleLogin(event)}>
+                            <form onSubmit={(e) => handleLogin(e)}>
                                 <div className="log-right ps-lg-5">
                                     <h3 className="log-heading pb-3">Log In to Your Account</h3>
                                     <h6 className="log-para pb-5">
@@ -113,6 +117,8 @@ export default function Login() {
                                                 name="email"
                                                 id="email"
                                                 placeholder="john.doe@gmail.com"
+                                                value={formData.email}
+                                                onChange={handleInputChange}
                                             />
                                         </div>
                                         <div className="log-group-icon">
@@ -128,9 +134,11 @@ export default function Login() {
                                         <div className="log-group-input">
                                             <input
                                                 type="password"
-                                                name="cvv"
-                                                id="cvv"
+                                                name="password"
+                                                id="password"
                                                 placeholder="**********"
+                                                value={formData.password}
+                                                onChange={handleInputChange}
                                             />
                                         </div>
 
@@ -164,7 +172,7 @@ export default function Login() {
                                             border: "none",
                                             color: "white",
                                             height: "40px",
-                                            width: "100%"
+                                            width: "100%",
                                         }} >Login</button>
                                     </div>
                                     <p className="log-or text-center pt-4">Or</p>

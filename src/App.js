@@ -19,6 +19,8 @@ import { isAuthenticated } from './components/login/auth';
 function App() {
   const [mainCurrentPath, setMainCurrentPath] = useState('');
 
+  console.log(isAuthenticated);
+
   const handlePathChange = (path) => {
     setMainCurrentPath(path);
   };
@@ -30,9 +32,9 @@ function App() {
         <Route path="/signup" element={<SignUp />} />
 
         <Route
-          path="/dashboard/*"
+          path="/dashboard"
           element={
-            <PrivateRoute isAuthenticated={isAuthenticated}>
+            <PrivateRoute isAuthenticated={isAuthenticated()}>
               <Dashboard handlePathChange={handlePathChange} mainCurrentPath={mainCurrentPath} />
             </PrivateRoute >
           }
@@ -40,7 +42,7 @@ function App() {
         <Route
           path="/myprogram"
           element={
-            <PrivateRoute isAuthenticated={isAuthenticated} >
+            <PrivateRoute isAuthenticated={isAuthenticated()} >
               <MyProgram handlePathChange={handlePathChange} mainCurrentPath={mainCurrentPath} />
             </PrivateRoute>
           }
@@ -48,7 +50,7 @@ function App() {
         <Route
           path="/setting"
           element={
-            <PrivateRoute isAuthenticated={isAuthenticated} >
+            <PrivateRoute isAuthenticated={isAuthenticated()} >
               <Setting handlePathChange={handlePathChange} mainCurrentPath={mainCurrentPath} />
             </PrivateRoute>
           }
@@ -56,7 +58,7 @@ function App() {
         <Route
           path="/faq"
           element={
-            <PrivateRoute isAuthenticated={isAuthenticated} >
+            <PrivateRoute isAuthenticated={isAuthenticated()} >
               <Faq handlePathChange={handlePathChange} />
             </PrivateRoute>
           }
