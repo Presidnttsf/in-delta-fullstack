@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { isAuthenticated } from './auth';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../dashboard/Modal';
 
@@ -15,14 +14,6 @@ export default function Login() {
 
     });
     const user = JSON.parse(localStorage.getItem("user"));
-    useEffect(() => {
-        console.log("Checking authentication...", user);
-        const authenticated = isAuthenticated();
-        if (authenticated) {
-            console.log("Is authenticated:", authenticated);
-            // navigate("/"); // Redirect if authenticated
-        }
-    }, [navigate]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -57,7 +48,6 @@ export default function Login() {
         if (email === user.email && password === user.password) {
             setMessage("Login successful!");
             setShowModal(true);
-            localStorage.setItem("loggedin", "true");
             navigate("/dashboard");
         } else {
             setMessage("Invalid credentials!");

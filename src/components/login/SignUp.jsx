@@ -49,6 +49,13 @@ export default function SignUp() {
       return;
     }
 
+    if (password.length < 6) {
+      setMessage("Password should be greater than 6 digit")
+      setShowModal(true);
+      return;
+    }
+
+
     // Show success message
     setMessage("Sign up successfully!! Please Login");
     setShowModal(true);

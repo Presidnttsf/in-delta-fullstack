@@ -1,12 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
 
 
 export default function LeftSideBar() {
-
+    const navigate = useNavigate();
     let pathName = window.location.pathname;
     // console.log("pathName", pathName)
     const user = JSON.parse(localStorage.getItem("user"));
+
+    function handleLogout() {
+        localStorage.removeItem("user");
+        navigate("/");
+    }
+
 
     return (
         <div className="sidebar px-5 d-none d-md-block">
@@ -53,10 +60,10 @@ export default function LeftSideBar() {
 
                 <nav className="sidebar-menu pt-4 pb-5 ps-3">
                     <ul>
-                        <li><a href="#">About Us</a></li>
-                        <li><a href="#">How it Works</a></li>
-                        <li><a href="#">Resources and Articles</a></li>
-                        <li><a href="login.html">Logout</a></li>
+                        <li><a>About Us</a></li>
+                        <li><a>How it Works</a></li>
+                        <li><a>Resources and Articles</a></li>
+                        <li><a onClick={handleLogout}>Logout</a></li>
                     </ul>
                 </nav>
 

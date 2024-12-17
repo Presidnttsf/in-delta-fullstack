@@ -9,7 +9,6 @@ export default function Header(props) {
     const [faq, setFaq] = useState(false);
     const navigate = useNavigate();
     const user = JSON.parse(localStorage.getItem("user"))
-    console.log("header", user.name)
     const handleLogOut = () => {
         localStorage.removeItem("user");
         navigate("/");
