@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { json, Link, useNavigate } from 'react-router-dom';
 import { isAuthenticated } from '../login/auth';
 import Modal from './Modal';
 
@@ -8,12 +8,10 @@ export default function Header(props) {
     const [header, setHeader] = useState('');
     const [faq, setFaq] = useState(false);
     const navigate = useNavigate();
-
+    const user = JSON.parse(localStorage.getItem("user"))
+    console.log("header", user.name)
     const handleLogOut = () => {
-        console.log("log out clicked", isAuthenticated.token)
         localStorage.removeItem("user");
-        // isAuthenticated.token = false;
-        // window.location.href = '/';
         navigate("/");
 
     }
@@ -104,8 +102,8 @@ export default function Header(props) {
                                     <div className="admin-profile text-center">
                                         <img src="images/admin-profile.png"
                                             className="admin-sidebar-img" />
-                                        <h4 className="admin-name text-light">John Doe</h4>
-                                        <p className="admin-mail">john.doe@gmail.com</p>
+                                        <h4 className="admin-name text-light">{user.name}</h4>
+                                        <p className="admin-mail">{user.email}</p>
                                     </div>
                                 </div>
 
@@ -206,7 +204,7 @@ export default function Header(props) {
                     <a href="#" className="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="images/admin-profile.png" className="admin-border-img" />
-                        <h4 className="admin-name ps-2">John Doe</h4>
+                        <h4 className="admin-name ps-2">{user.name}</h4>
                     </a>
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <div className="dropdown p-4">

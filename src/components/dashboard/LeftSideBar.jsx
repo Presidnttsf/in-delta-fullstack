@@ -6,7 +6,7 @@ export default function LeftSideBar() {
 
     let pathName = window.location.pathname;
     // console.log("pathName", pathName)
-
+    const user = JSON.parse(localStorage.getItem("user"));
 
     return (
         <div className="sidebar px-5 d-none d-md-block">
@@ -19,8 +19,8 @@ export default function LeftSideBar() {
                 <div className="sidebar-admin pt-5 pb-md-4">
                     <div className="admin-profile text-center pt-3">
                         <img src="images/sidebar-admin-profile.png" alt="Admin" />
-                        <h4 className="admin-name text-light pt-2">John Doe</h4>
-                        <p className="admin-mail">john.doe@gmail.com</p>
+                        <h4 className="admin-name text-light pt-2">{user.name}</h4>
+                        <p className="admin-mail">{user.email}</p>
                     </div>
                 </div>
 

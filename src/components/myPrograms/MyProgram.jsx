@@ -11,7 +11,7 @@ export default function MyProgram({ handlePathChange, mainCurrentPath }) {
     }, [handlePathChange]);
 
     return (
-        <PrivateRoute isAuthenticated={isAuthenticated}>
+        <PrivateRoute isAuthenticated={isAuthenticated()}>
             <Layout currentPath={mainCurrentPath}>
 
                 <div className="subscribe-program pt-4 mt-5">
