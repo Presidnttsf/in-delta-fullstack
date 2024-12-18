@@ -1,16 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-
+import { UserContext } from '../../UserContext';
 
 
 export default function LeftSideBar() {
     const navigate = useNavigate();
     let pathName = window.location.pathname;
-    // console.log("pathName", pathName)
-    const user = JSON.parse(localStorage.getItem("user"));
+    // const user = JSON.parse(localStorage.getItem("user")); //data manage by local storage
+    const { person, setPerson } = useContext(UserContext); //data manage by global state userContext
+    // console.log("usercontext", person.email)
 
     function handleLogout() {
-        localStorage.removeItem("user");
+        // localStorage.removeItem("user");
+        setPerson(null)
         navigate("/");
     }
 
@@ -26,8 +28,8 @@ export default function LeftSideBar() {
                 <div className="sidebar-admin pt-5 pb-md-4">
                     <div className="admin-profile text-center pt-3">
                         <img src="images/sidebar-admin-profile.png" alt="Admin" />
-                        <h4 className="admin-name text-light pt-2">{user.name}</h4>
-                        <p className="admin-mail">{user.email}</p>
+                        <h4 className="admin-name text-light pt-2">{person.name}</h4>
+                        <p className="admin-mail">{person.email}</p>
                     </div>
                 </div>
 

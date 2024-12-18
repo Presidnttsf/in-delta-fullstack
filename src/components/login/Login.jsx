@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Modal from '../dashboard/Modal';
+import { UserContext } from '../../UserContext';
 
 
 export default function Login() {
@@ -13,7 +14,8 @@ export default function Login() {
         password: '',
 
     });
-    const user = JSON.parse(localStorage.getItem("user"));
+    // const user = JSON.parse(localStorage.getItem("user")); //when using local storage
+    const { person } = useContext(UserContext)
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -37,7 +39,7 @@ export default function Login() {
             return;
         }
 
-        if (!user) {
+        if (!person) {
             setMessage("No user found. Please create an account!");
             setShowModal(true);
             return;
@@ -45,7 +47,7 @@ export default function Login() {
 
 
 
-        if (email === user.email && password === user.password) {
+        if (email === person.email && password === person.password) {
             setMessage("Login successful!");
             setShowModal(true);
             navigate("/dashboard");

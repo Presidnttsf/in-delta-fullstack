@@ -6,11 +6,11 @@ import ManageCard from './ManageCard';
 import NotificationSettings from './NotificationSettings';
 import Layout from '../dashboard/Layout';
 import PrivateRoute from '../PrivateRoute';
-import { isAuthenticated } from '../login/auth';
+import { useIsAuthenticated } from '../login/auth';
 
 export default function Setting({ handlePathChange, mainCurrentPath }) {
     const [activeTab, setActiveTab] = useState("editprofile");
-
+    const isAuthenticated = useIsAuthenticated();
     const handleTabClick = (tab) => {
         // console.log(tab)
         setActiveTab(tab);

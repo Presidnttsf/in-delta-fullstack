@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import Layout from '../dashboard/Layout';
 import PrivateRoute from '../PrivateRoute';
-import { isAuthenticated } from '../login/auth';
+import { useIsAuthenticated } from '../login/auth';
 
 export default function MyProgram({ handlePathChange, mainCurrentPath }) {
+
+    const isAuthenticated = useIsAuthenticated();
 
     useEffect(() => {
         // Call handlePathChange with the current path when the component mounts
@@ -11,7 +13,7 @@ export default function MyProgram({ handlePathChange, mainCurrentPath }) {
     }, [handlePathChange]);
 
     return (
-        <PrivateRoute isAuthenticated={isAuthenticated()}>
+        <PrivateRoute isAuthenticated={isAuthenticated}>
             <Layout currentPath={mainCurrentPath}>
 
                 <div className="subscribe-program pt-4 mt-5">

@@ -1,8 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../dashboard/Modal';
+import { UserContext } from '../../UserContext';
+
 
 export default function SignUp() {
+
+  const { person, setPerson } = useContext(UserContext);
+
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
   const [showModal, setShowModal] = useState(false);
@@ -56,20 +61,22 @@ export default function SignUp() {
     }
 
 
-    // Show success message
-    setMessage("Sign up successfully!! Please Login");
-    setShowModal(true);
+    const userData = { name, email, password };
+    try {
+      // localStorage.setItem('user', JSON.stringify(userData));
+      // console.log("userdata", userData)
+      setPerson(userData);
 
-    // Save user data in localStorage (avoid storing sensitive info like password in production)
-    localStorage.setItem(
-      "user",
-      JSON.stringify({ name, email, password }) // Store only what's necessary
-    );
+      setMessage("Sign-up successful! Please log in.");
+      setShowModal(true);
 
-    // Redirect to login page
-    navigate("/");
+      // Redirect to login after a delay
+      setTimeout(() => navigate('/'), 1000);
+    } catch (error) {
+      setMessage("An error occurred during sign-up. Please try again.");
+      setShowModal(true);
+    }
   };
-
 
   const handleLogin = () => {
 
