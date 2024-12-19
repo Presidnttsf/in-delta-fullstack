@@ -12,6 +12,7 @@ import Setting from './components/settings/Setting';
 import Faq from './components/dashboard/Faq';
 import PrivateRoute from './components/PrivateRoute';
 import { useIsAuthenticated } from './components/login/auth';
+import ForgetPassword from './components/login/ForgetPassword';
 
 function App() {
   const [mainCurrentPath, setMainCurrentPath] = useState('');
@@ -26,6 +27,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/forgetpassword" element={<ForgetPassword />} />
 
         <Route
           path="/dashboard"

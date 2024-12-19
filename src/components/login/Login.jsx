@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Modal from '../dashboard/Modal';
 import { UserContext } from '../../UserContext';
+import { Link } from 'react-router-dom';
 
 
 export default function Login() {
@@ -151,9 +152,9 @@ export default function Login() {
                                             <span className="check-text-101 ps-2">Keep me logged in</span>
                                         </label>
                                         <div className="log-forgot ms-auto">
-                                            <a to="/forgetpassword" className="log-forgot-text">
+                                            <Link to="/forgetpassword" className="log-forgot-text">
                                                 Forgot Password
-                                            </a>
+                                            </Link>
                                         </div>
                                     </div>
                                     {/* main-btn */}

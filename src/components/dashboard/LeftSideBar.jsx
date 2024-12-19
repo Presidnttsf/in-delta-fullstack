@@ -65,7 +65,7 @@ export default function LeftSideBar() {
                         <li><a>About Us</a></li>
                         <li><a>How it Works</a></li>
                         <li><a>Resources and Articles</a></li>
-                        <li><a onClick={handleLogout}>Logout</a></li>
+                        <li><Link to="/">Logout</Link></li>
                     </ul>
                 </nav>
 
