@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react'
 import Modal from '../dashboard/Modal'
-import { Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { UserContext } from '../../UserContext';
 
 export default function ForgetPassword() {
 
-
+    const navigate = useNavigate();
     const { person, setPerson } = useContext(UserContext);
     const [message, setMessage] = useState("");
     const [showModal, setShowModal] = useState(false);
@@ -39,7 +39,7 @@ export default function ForgetPassword() {
             return;
         }
         if (!password) {
-            setMessage("Email cannot be empty!");
+            setMessage("password cannot be empty!");
             setShowModal(true);
             return;
         }
@@ -57,6 +57,9 @@ export default function ForgetPassword() {
 
             setMessage(`Password reset successfully for ${email}.`);
             setShowModal(true);
+            setTimeout(() => navigate('/'), 1000);
+
+
         } else {
             setMessage("No account associated with this email.");
             setShowModal(true);

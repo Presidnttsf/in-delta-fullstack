@@ -57,7 +57,10 @@ export default function Login() {
             setShowModal(true);
         }
     };
+    function handleOtp() {
+        navigate("/otpgenerate")
 
+    }
 
 
     const closeModal = () => {
@@ -151,11 +154,13 @@ export default function Login() {
                                             <span className="check-span-101" />
                                             <span className="check-text-101 ps-2">Keep me logged in</span>
                                         </label>
+
                                         <div className="log-forgot ms-auto">
                                             <Link to="/forgetpassword" className="log-forgot-text">
                                                 Forgot Password
                                             </Link>
                                         </div>
+
                                     </div>
                                     {/* main-btn */}
                                     <div className="main-btn text-center">
@@ -168,8 +173,26 @@ export default function Login() {
                                             width: "100%",
                                         }} >Login</button>
                                     </div>
+
+                                    <div className="main-btn text-center otp-btn">
+
+                                        <button onClick={handleOtp} style={{
+                                            background: "none",
+                                            border: "none",
+                                            color: "white",
+                                            height: "40px",
+                                            width: "100%",
+
+                                        }} >Login with OTP</button>
+                                    </div>
+
+
                                     <p className="log-or text-center pt-4">Or</p>
+
+
+
                                     {/* log-social */}
+
                                     <div className="log-social d-flex align-items-center justify-content-center pt-5">
                                         <div className="log-social-icon px-3">
                                             <img
@@ -191,12 +214,20 @@ export default function Login() {
                                                 alt='logo'
                                             />
                                         </div>
+                                        <div className="log-social-icon px-3">
+                                            <img
+                                                src="images/login/log_apple.png"
+                                                className="img-fluid log-social-img"
+                                                alt='logo'
+                                            />
+                                        </div>
                                     </div>
                                     {/* create-an-acc */}
                                     <div className="create-account text-center pt-4">
                                         Not registered yet? <span onClick={handleCreate}>Create an Account</span>
 
                                     </div>
+
                                 </div>
                             </form>
                         </div>

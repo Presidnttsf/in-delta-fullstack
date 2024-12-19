@@ -13,6 +13,7 @@ import Faq from './components/dashboard/Faq';
 import PrivateRoute from './components/PrivateRoute';
 import { useIsAuthenticated } from './components/login/auth';
 import ForgetPassword from './components/login/ForgetPassword';
+import OtpGenerate from "./components/login/OtpGenerate"
 
 function App() {
   const [mainCurrentPath, setMainCurrentPath] = useState('');
@@ -28,6 +29,7 @@ function App() {
         <Route path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgetpassword" element={<ForgetPassword />} />
+        <Route path="/otpgenerate" element={<OtpGenerate />} />
 
         <Route
           path="/dashboard"
