@@ -9,7 +9,10 @@ export default function ForgetPassword() {
     const { person, setPerson } = useContext(UserContext);
     const [message, setMessage] = useState("");
     const [showModal, setShowModal] = useState(false);
-    const [formData, setFormData] = useState({ email: '', password: "" });
+    const [formData, setFormData] = useState({
+        email: '',
+        password: '',
+    });
 
 
     const handleChange = (e) => {
@@ -20,7 +23,9 @@ export default function ForgetPassword() {
 
 
     function handleSubmit() {
-        if (!formData.email) {
+
+        const { email, password } = formData;
+        if (!email) {
             setMessage("Email cannot be empty!");
             setShowModal(true);
             return;
@@ -28,24 +33,30 @@ export default function ForgetPassword() {
 
 
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.email)) {
+        if (!emailRegex.test(email)) {
             setMessage("Please enter a valid email address!");
             setShowModal(true);
             return;
         }
-        if (!formData.password) {
+        if (!password) {
             setMessage("Email cannot be empty!");
             setShowModal(true);
             return;
         }
 
-
-
-        if (person) {
-            setPerson(formData);
-            setMessage(`Instructions and a link have been sent to ${person.email}.`);
+        if (password.length < 6) {
+            setMessage("Password should be greater than 6 digit")
             setShowModal(true);
+            return;
+        }
 
+        if (person && person.email === email) {
+            // Update the password in the context
+            const updatedPerson = { ...person, password };
+            setPerson(updatedPerson);
+
+            setMessage(`Password reset successfully for ${email}.`);
+            setShowModal(true);
         } else {
             setMessage("No account associated with this email.");
             setShowModal(true);
@@ -99,8 +110,9 @@ export default function ForgetPassword() {
                                         name="email"
                                         id="email"
                                         placeholder="john.doe@gmail.com"
-                                        value={formData.email || ""}
                                         onChange={handleChange}
+                                        value={formData.email || ""}
+
                                         required />
                                 </div>
                                 <div className="log-group-icon">
