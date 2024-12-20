@@ -15,20 +15,21 @@ export default function SignUp() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
+    mobile: "",
     password: '',
     confirmPassword: '',
+
   });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-
   };
 
   const handleSignup = (e) => {
     e.preventDefault();
 
-    const { name, email, password, confirmPassword } = formData;
+    const { name, email, mobile, password, confirmPassword } = formData;
 
     if (!name) {
       setMessage("Name cannot be empty!");
@@ -42,6 +43,19 @@ export default function SignUp() {
       return;
     }
 
+    if (!mobile) {
+      setMessage("Mobile cannot be empty!");
+      setShowModal(true);
+      return;
+
+    }
+
+    if (mobile.length !== 10) {
+      setMessage("Mobile number should be 10 digits.");
+      setShowModal(true);
+      return;
+
+    }
     if (!password) {
       setMessage("Password cannot be empty!");
       setShowModal(true);
@@ -61,7 +75,7 @@ export default function SignUp() {
     }
 
 
-    const userData = { name, email, password };
+    const userData = { name, email, password, mobile };
     try {
       // localStorage.setItem('user', JSON.stringify(userData));
       // console.log("userdata", userData)
@@ -159,7 +173,7 @@ export default function SignUp() {
                 </div>
                 <div className="log-group-icon">
                   <img
-                    src="images/log-profile.png"
+                    src="images/redProfile.png"
                     className="img-fluid"
                     alt="Profile Icon"
                   />
@@ -184,6 +198,28 @@ export default function SignUp() {
                     src="images/log-msg-icon.svg"
                     className="img-fluid"
                     alt="Email Icon"
+                  />
+                </div>
+              </div>
+              {/* mobile */}
+              <div className="log-group">
+                <div className="log-group-input">
+                  <input
+                    type="tele"
+                    name="mobile"
+                    id="mobile"
+                    placeholder="902XXXXX36"
+                    maxLength={10}
+                    value={formData.mobile}
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+                <div className="log-group-icon">
+                  <img
+                    src="images/redphone.png"
+                    className="img-fluid"
+                    alt="Confirm Password Icon"
                   />
                 </div>
               </div>

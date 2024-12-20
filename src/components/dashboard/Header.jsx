@@ -209,7 +209,11 @@ export default function Header(props) {
                     <a href="#" className="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <img src="images/admin-profile.png" className="admin-border-img" />
-                        <h4 className="admin-name ps-2">{person.name}</h4>
+                        {person.name == " " ? <h4 className="admin-name ps-2">{person.mobile}</h4> :
+                            <h4 className="admin-name ps-2">{person.name}</h4>
+
+                        }
+
                     </a>
                     <div className="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <div className="dropdown p-4">

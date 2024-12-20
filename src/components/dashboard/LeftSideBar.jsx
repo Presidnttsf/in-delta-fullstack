@@ -28,8 +28,12 @@ export default function LeftSideBar() {
                 <div className="sidebar-admin pt-5 pb-md-4">
                     <div className="admin-profile text-center pt-3">
                         <img src="images/sidebar-admin-profile.png" alt="Admin" />
-                        <h4 className="admin-name text-light pt-2">{person.name}</h4>
-                        <p className="admin-mail">{person.email}</p>
+                        {person.name == " " && person.email == " " ? <h4 className="admin-mail">User: {person.mobile}</h4>
+                            :
+                            (<><h4 className="admin-name text-light pt-2">{person.name}</h4>
+                                <p className="admin-mail">Email: {person.email}</p>
+                                <p className="admin-mail">Contact: {person.mobile}</p> </>)
+                        }
                     </div>
                 </div>
 

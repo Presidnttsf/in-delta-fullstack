@@ -174,16 +174,15 @@ export default function Login() {
                                         }} >Login</button>
                                     </div>
 
-                                    <div className="main-btn text-center otp-btn">
+                                    <div className="text-center otp-btn">
 
-                                        <button onClick={handleOtp} style={{
-                                            background: "none",
+                                        <Link to="/otpgenerate" style={{
+
                                             border: "none",
-                                            color: "white",
-                                            height: "40px",
-                                            width: "100%",
+                                            color: "black",
+                                            fontSize: "small"
 
-                                        }} >Login with OTP</button>
+                                        }} >Login with OTP</Link>
                                     </div>
 
 
@@ -214,13 +213,7 @@ export default function Login() {
                                                 alt='logo'
                                             />
                                         </div>
-                                        <div className="log-social-icon px-3">
-                                            <img
-                                                src="images/login/log_apple.png"
-                                                className="img-fluid log-social-img"
-                                                alt='logo'
-                                            />
-                                        </div>
+
                                     </div>
                                     {/* create-an-acc */}
                                     <div className="create-account text-center pt-4">

@@ -1173,6 +1173,10 @@ h6 {
 }
 
 .otp-btn {
+    background: linear-gradient(0deg, rgb(219, 210, 210) 15%, rgb(171, 143, 143) 100%);
+    border-radius: 30px;
     margin-top: 10px;
+    padding: 10px;
+
 
 }
