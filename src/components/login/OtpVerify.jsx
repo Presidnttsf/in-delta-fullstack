@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import Modal from '../dashboard/Modal';
 
@@ -6,6 +6,7 @@ import Modal from '../dashboard/Modal';
 
 const OtpVerify = () => {
 
+  const inputRefs = useRef([]);
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
@@ -25,11 +26,26 @@ const OtpVerify = () => {
   }, [])
 
   const handleInputChange = (index, value) => {
+    if (!/^\d*$/.test(value)) return; // Allow only numbers
     if (value.length > 1) return; // Prevent entering more than 1 digit
     const newOtp = [...userOtp];
     newOtp[index] = value;
     setUserOtp(newOtp);
+
+    // Automatically move focus to the next input field
+    if (value !== '' && index < 3) {
+      inputRefs.current[index + 1]?.focus();
+    }
+
+
   };
+
+  const handleInputHover = (index) => {
+    if (index === 0) {
+      setShowModal(false);
+    }
+  };
+
 
   const verifyOtp = () => {
     const enteredOtp = userOtp.join(""); // Combine the digits
@@ -89,53 +105,26 @@ const OtpVerify = () => {
               {/* otp-varification */}
               <div className="log-verify mb-4">
                 <div className="row">
-                  <div className="col-3 pe-4">
-                    <div className="resend-input">
-                      <input
-                        type="text"
-                        className="form-control"
-                        maxLength={1}
-                        value={userOtp[0]}
-                        onChange={(e) => handleInputChange(0, e.target.value)}
-                      />
+                  {/* applying automatic cursor move */}
+                  {userOtp.map((digit, index) => <>
+                    <div className="col-3 pe-4">
+                      <div className="resend-input">
+                        <input
+                          type="text"
+                          className="form-control"
+                          maxLength={1}
+                          value={digit}
+                          ref={(el) => (inputRefs.current[index] = el)}
+                          onMouseEnter={() => handleInputHover(index)}
+                          onFocus={() => handleInputHover(index)} onChange={(e) => handleInputChange(index, e.target.value)}
+                        />
+                      </div>
                     </div>
-                  </div>
-                  <div className="col-3 pe-4">
-                    <div className="resend-input">
-                      <input
-                        type="text"
-                        className="form-control"
-                        maxLength={1}
-                        value={userOtp[1]}
-                        onChange={(e) => handleInputChange(1, e.target.value)}
 
-                      />
-                    </div>
-                  </div>
-                  <div className="col-3 pe-4">
-                    <div className="resend-input">
-                      <input
-                        type="text"
-                        className="form-control"
-                        maxLength={1}
-                        value={userOtp[2]}
-                        onChange={(e) => handleInputChange(2, e.target.value)}
+                  </>
 
-                      />
-                    </div>
-                  </div>
-                  <div className="col-3 pe-4">
-                    <div className="resend-input">
-                      <input
-                        type="text"
-                        className="form-control"
-                        maxLength={1}
-                        value={userOtp[3]}
-                        onChange={(e) => handleInputChange(3, e.target.value)}
+                  )}
 
-                      />
-                    </div>
-                  </div>
                 </div>
               </div>
               {/* create-an-acc */}
