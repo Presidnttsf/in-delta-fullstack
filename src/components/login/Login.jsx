@@ -182,7 +182,7 @@ export default function Login() {
                                             color: "black",
                                             fontSize: "small"
 
-                                        }} >Login with OTP</Link>
+                                        }} >Login with Mobile</Link>
                                     </div>
 
 
