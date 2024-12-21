@@ -107,7 +107,7 @@ export default function Header(props) {
                                     <div className="admin-profile text-center">
                                         <img src="images/admin-profile.png"
                                             className="admin-sidebar-img" />
-                                        <h4 className="admin-name text-light">{person.name}</h4>
+                                        <p className="admin-name text-light">{person.name}</p>
                                         <p className="admin-mail">{person.email}</p>
                                     </div>
                                 </div>

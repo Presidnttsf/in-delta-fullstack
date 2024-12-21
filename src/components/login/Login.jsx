@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 import Modal from '../dashboard/Modal';
 import { UserContext } from '../../UserContext';
@@ -70,6 +70,21 @@ export default function Login() {
     const handleCreate = () => {
         navigate("/signup"); // Redirect to signup
     };
+
+    // Apply the no-pointer-events class to the body when the modal is open
+    useEffect(() => {
+        if (showModal) {
+            document.body.classList.add('no-pointer-events');
+        } else {
+            document.body.classList.remove('no-pointer-events');
+        }
+
+        return () => {
+            document.body.classList.remove('no-pointer-events');
+        };
+    }, [showModal]);
+
+
 
 
     return (

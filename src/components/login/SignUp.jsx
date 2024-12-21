@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../dashboard/Modal';
 import { UserContext } from '../../UserContext';
@@ -101,6 +101,26 @@ export default function SignUp() {
     setShowModal(false);
   };
 
+  const handleFocus = () => {
+    setShowModal(false);
+  };
+
+  // Apply the no-pointer-events class to the body when the modal is open
+  useEffect(() => {
+    if (showModal) {
+      document.body.classList.add('no-pointer-events');
+    } else {
+      document.body.classList.remove('no-pointer-events');
+    }
+
+    return () => {
+      document.body.classList.remove('no-pointer-events');
+    };
+  }, [showModal]);
+
+
+
+
   return (
     <div className="main-log login-page">
       {showModal && <Modal visible={showModal} onClose={closeModal} message={message} />}
@@ -168,6 +188,7 @@ export default function SignUp() {
                     placeholder="John Doe"
                     value={formData.name}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                     required
                   />
                 </div>
@@ -190,6 +211,7 @@ export default function SignUp() {
                     placeholder="john.doe@gmail.com"
                     value={formData.email}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                     required
                   />
                 </div>
@@ -212,6 +234,7 @@ export default function SignUp() {
                     maxLength={10}
                     value={formData.mobile}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                     required
                   />
                 </div>
@@ -234,6 +257,7 @@ export default function SignUp() {
                     placeholder="New password"
                     value={formData.password}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                     required
                   />
                 </div>
@@ -256,6 +280,7 @@ export default function SignUp() {
                     placeholder="Confirm password"
                     value={formData.confirmPassword}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                     required
                   />
                 </div>

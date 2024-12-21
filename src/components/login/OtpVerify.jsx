@@ -45,6 +45,18 @@ const OtpVerify = () => {
       setShowModal(false);
     }
   };
+  // Apply the no-pointer-events class to the body when the modal is open
+  useEffect(() => {
+    if (showModal) {
+      document.body.classList.add('no-pointer-events');
+    } else {
+      document.body.classList.remove('no-pointer-events');
+    }
+
+    return () => {
+      document.body.classList.remove('no-pointer-events');
+    };
+  }, [showModal]);
 
 
   const verifyOtp = () => {
@@ -109,9 +121,10 @@ const OtpVerify = () => {
                 <div className="row">
                   {/* applying automatic cursor move */}
                   {userOtp.map((digit, index) => <>
-                    <div className="col-3 pe-4">
+                    <div className="col-3 pe-4" >
                       <div className="resend-input">
                         <input
+                          key={index + 1}
                           type="text"
                           className="form-control"
                           maxLength={1}
