@@ -41,7 +41,7 @@ const OtpVerify = () => {
   };
 
   const handleInputHover = (index) => {
-    if (index === 0) {
+    if (index >= 0) {
       setShowModal(false);
     }
   };
@@ -50,9 +50,11 @@ const OtpVerify = () => {
   const verifyOtp = () => {
     const enteredOtp = userOtp.join(""); // Combine the digits
     if (enteredOtp === generatedOtp) {
+      setShowModal(true);
       setMessage("OTP Verified Successfully!");
       setTimeout(() => navigate("/dashboard"), 1000); // Example navigation
     } else {
+      setShowModal(true);
       setMessage("Invalid OTP. Please try again.");
     }
   };
@@ -116,7 +118,8 @@ const OtpVerify = () => {
                           value={digit}
                           ref={(el) => (inputRefs.current[index] = el)}
                           onMouseEnter={() => handleInputHover(index)}
-                          onFocus={() => handleInputHover(index)} onChange={(e) => handleInputChange(index, e.target.value)}
+                          onFocus={() => handleInputHover(index)}
+                          onChange={(e) => handleInputChange(index, e.target.value)}
                         />
                       </div>
                     </div>
