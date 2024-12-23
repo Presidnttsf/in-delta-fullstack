@@ -237,7 +237,7 @@ export default function SignUp() {
                   type="file"
                   id="profilePicture"
                   accept="image/*"
-                  capture="user"
+                  capture="environment"
                   style={{ display: 'none' }}
                   onChange={handleImageCapture}
                 />
