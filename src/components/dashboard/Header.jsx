@@ -101,7 +101,7 @@ export default function Header(props) {
                             <div className="sidebar-brand text-center pt-5">
                                 <img src="images/logo.png" alt="logo" />
                             </div>
-
+                            {/* left side bar active then show this */}
                             <div className="sidebar-content">
                                 <div className="sidebar-admin pt-5">
                                     <div className="admin-profile text-center">
@@ -211,7 +211,7 @@ export default function Header(props) {
                     <a href="#" className="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
                         <img src={person.profilePicture ? URL.createObjectURL(person.profilePicture) : "images/sidebar-admin-profile.png"} alt="Admin" className="admin-border-img" style={{ border: "1px solid red", borderRadius: "50%" }} />
-
+                        {/* if login with OTP */}
                         {person.name == " " ? <p className="admin-name ps-2">{person.mobile}</p> :
                             <p className="admin-name ps-2">{person.name}</p>
 
