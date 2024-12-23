@@ -28,8 +28,8 @@ export default function LeftSideBar() {
                 <div className="sidebar-admin pt-5 pb-md-4">
                     <div className="admin-profile text-center pt-3">
                         {/* <img src="images/sidebar-admin-profile.png" alt="Admin" /> */}
-                        <img src={person.profilePicture ? URL.createObjectURL(person.profilePicture) : "images/sidebar-admin-profile.png"} alt="Admin" />
-                        {person.name == " " && person.email == " " ? <h4 className="admin-mail">{person.mobile}</h4>
+                        <img src={person.profilePicture ? URL.createObjectURL(person.profilePicture) : "images/sidebar-admin-profile.png"} alt="Admin" className="admin-border-img" />
+                        {person.name == " " && person.email == " " ? <p className="admin-mail">{person.mobile}</p>
                             :
                             (<><h4 className="admin-name text-light pt-2">{person.name}</h4>
                                 <h6 className="admin-mail">Email: {person.email}</h6>
