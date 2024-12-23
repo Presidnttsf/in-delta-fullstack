@@ -105,10 +105,14 @@ export default function Header(props) {
                             <div className="sidebar-content">
                                 <div className="sidebar-admin pt-5">
                                     <div className="admin-profile text-center">
-                                        <img src="images/admin-profile.png"
-                                            className="admin-sidebar-img" />
+                                        {/* <img src="images/admin-profile.png"
+                                            className="admin-sidebar-img" /> */}
+                                        <img src={person.profilePicture ? URL.createObjectURL(person.profilePicture) : "images/admin-profile.png"} alt="Admin" className="admin-sidebar-img" />
+
+
                                         <p className="admin-name text-light">{person.name}</p>
                                         <p className="admin-mail">{person.email}</p>
+                                        <p className="admin-mail">{person.mobile}</p>
                                     </div>
                                 </div>
 
@@ -208,7 +212,9 @@ export default function Header(props) {
                 <div className="admin-profile ps-5">
                     <a href="#" className="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="images/admin-profile.png" className="admin-border-img" />
+                        <img src={person.profilePicture ? URL.createObjectURL(person.profilePicture) : "images/admin-profile.png"} alt="admin" />
+
+
                         {person.name == " " ? <h4 className="admin-name ps-2">{person.mobile}</h4> :
                             <h4 className="admin-name ps-2">{person.name}</h4>
 

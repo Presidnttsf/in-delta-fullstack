@@ -7,6 +7,10 @@ import { UserContext } from '../../UserContext';
 export default function SignUp() {
 
   const { person, setPerson } = useContext(UserContext);
+  const [showPassword, setShowPassword] = useState(false);  // State to toggle password visibility
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);  // State to toggle password visibility
+  const [profilePicture, setProfilePicture] = useState(null); // State for profile picture
+
 
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
@@ -19,6 +23,7 @@ export default function SignUp() {
     password: '',
     confirmPassword: '',
 
+
   });
 
   const handleChange = (e) => {
@@ -26,10 +31,30 @@ export default function SignUp() {
     setFormData({ ...formData, [name]: value });
   };
 
+
+  const handleImageCapture = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB limit
+      if (file.size > MAX_FILE_SIZE) {
+        alert("File size exceeds 5MB. Please upload a smaller image.");
+        return;
+      }
+
+      const previewURL = URL.createObjectURL(file); // Generate Blob URL
+
+      setProfilePicture(previewURL);
+      setFormData((prev) => ({ ...prev, profilePicture: file })); // Store file object in formData
+    }
+  };
+
+
+
   const handleSignup = (e) => {
     e.preventDefault();
 
-    const { name, email, mobile, password, confirmPassword } = formData;
+    const { name, email, mobile, password, confirmPassword, profilePicture } = formData;
 
     if (!name) {
       setMessage("Name cannot be empty!");
@@ -42,6 +67,22 @@ export default function SignUp() {
       setShowModal(true);
       return;
     }
+
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+    if (!emailRegex.test(email)) {
+      setMessage("Please enter a valid email address.");
+      setShowModal(true);
+      return;
+    }
+
+
+    if (!formData.profilePicture) {
+      setMessage("Profile picture required!");
+      setShowModal(true);
+      return;
+    }
+
+
 
     if (!mobile) {
       setMessage("Mobile cannot be empty!");
@@ -75,10 +116,10 @@ export default function SignUp() {
     }
 
 
-    const userData = { name, email, password, mobile };
+    const userData = { name, email, password, mobile, profilePicture };
     try {
       // localStorage.setItem('user', JSON.stringify(userData));
-      // console.log("userdata", userData)
+      console.log("userdata", userData.profilePicture)
       setPerson(userData);
 
       setMessage("Sign-up successful! Please log in.");
@@ -117,7 +158,6 @@ export default function SignUp() {
       document.body.classList.remove('no-pointer-events');
     };
   }, [showModal]);
-
 
 
 
@@ -177,6 +217,32 @@ export default function SignUp() {
               <h6 className="log-para pb-4">
                 Lorem ipsum is simple dummy text that can help.
               </h6>
+
+              {/* Upload Profile Picture */}
+              <div className="profile-picture-section">
+                <label htmlFor="profilePicture">
+                  {profilePicture ? (
+                    <img
+                      src={profilePicture}
+                      alt="Profile"
+                      style={{ width: '100px', height: '100px', borderRadius: '50%' }}
+                    />
+                  ) : (
+                    <div style={{ border: '1px dashed red', width: '100px', height: '100px', borderRadius: '50%', textAlign: 'center', lineHeight: '100px', marginBottom: "10px" }}>
+                      Add Photo
+                    </div>
+                  )}
+                </label>
+                <input
+                  type="file"
+                  id="profilePicture"
+                  accept="image/*"
+                  capture="user"
+                  style={{ display: 'none' }}
+                  onChange={handleImageCapture}
+                />
+              </div>
+
 
               {/* Name */}
               <div className="log-group">
@@ -251,7 +317,7 @@ export default function SignUp() {
               <div className="log-group">
                 <div className="log-group-input">
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"} // Toggle between text and password
                     name="password"
                     id="password"
                     placeholder="New password"
@@ -263,9 +329,10 @@ export default function SignUp() {
                 </div>
                 <div className="log-group-icon">
                   <img
-                    src="images/log-pass-icon.svg"
+                    src={showPassword ? "images/lock-open-icon.png" : "images/log-pass-icon.svg"}
                     className="img-fluid"
-                    alt="Password Icon"
+                    alt='logo'
+                    onClick={() => setShowPassword(prev => !prev)}
                   />
                 </div>
               </div>
@@ -274,7 +341,7 @@ export default function SignUp() {
               <div className="log-group">
                 <div className="log-group-input">
                   <input
-                    type="password"
+                    type={showConfirmPassword ? "text" : "password"} // Toggle between text and password
                     name="confirmPassword"
                     id="confirmPassword"
                     placeholder="Confirm password"
@@ -286,9 +353,10 @@ export default function SignUp() {
                 </div>
                 <div className="log-group-icon">
                   <img
-                    src="images/log-pass-icon.svg"
+                    src={showConfirmPassword ? "images/lock-open-icon.png" : "images/log-pass-icon.svg"}
                     className="img-fluid"
-                    alt="Confirm Password Icon"
+                    alt='logo'
+                    onClick={() => setShowConfirmPassword(prev => !prev)}
                   />
                 </div>
               </div>

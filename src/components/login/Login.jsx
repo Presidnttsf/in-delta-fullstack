@@ -18,6 +18,11 @@ export default function Login() {
     // const user = JSON.parse(localStorage.getItem("user")); //when using local storage
     const { person } = useContext(UserContext)
 
+    const [showPassword, setShowPassword] = useState(false);  // State to toggle password visibility
+
+
+
+
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
@@ -30,6 +35,13 @@ export default function Login() {
 
         if (!email) {
             setMessage("Email cannot be empty!");
+            setShowModal(true);
+            return;
+        }
+
+        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (!emailRegex.test(email)) {
+            setMessage("Please enter a valid email address.");
             setShowModal(true);
             return;
         }
@@ -69,6 +81,11 @@ export default function Login() {
 
     const handleCreate = () => {
         navigate("/signup"); // Redirect to signup
+    };
+
+    const togglePasswordVisibility = () => {
+        console.log("password clicked")
+        setShowPassword(prev => !prev);
     };
 
     // Apply the no-pointer-events class to the body when the modal is open
@@ -144,7 +161,7 @@ export default function Login() {
                                     <div className="log-group ms-2">
                                         <div className="log-group-input">
                                             <input
-                                                type="password"
+                                                type={showPassword ? "text" : "password"} // Toggle between text and password
                                                 name="password"
                                                 id="password"
                                                 placeholder="**********"
@@ -155,9 +172,10 @@ export default function Login() {
 
                                         <div className="log-group-icon">
                                             <img
-                                                src="images/log-pass-icon.svg"
+                                                src={showPassword ? "images/lock-open-icon.png" : "images/log-pass-icon.svg"}
                                                 className="img-fluid"
                                                 alt='logo'
+                                                onClick={togglePasswordVisibility}
                                             />
 
                                         </div>

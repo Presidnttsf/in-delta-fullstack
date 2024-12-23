@@ -8,13 +8,13 @@ export default function LeftSideBar() {
     let pathName = window.location.pathname;
     // const user = JSON.parse(localStorage.getItem("user")); //data manage by local storage
     const { person, setPerson } = useContext(UserContext); //data manage by global state userContext
-    // console.log("usercontext", person.email)
+    // console.log("usercontext", person.profilePicture)
 
-    function handleLogout() {
-        // localStorage.removeItem("user");
-        setPerson(null)
-        navigate("/");
-    }
+    // function handleLogout() {
+    //     // localStorage.removeItem("user");
+    //     setPerson(null)
+    //     navigate("/");
+    // }
 
 
     return (
@@ -27,12 +27,13 @@ export default function LeftSideBar() {
             <div className="sidebar-content">
                 <div className="sidebar-admin pt-5 pb-md-4">
                     <div className="admin-profile text-center pt-3">
-                        <img src="images/sidebar-admin-profile.png" alt="Admin" />
+                        {/* <img src="images/sidebar-admin-profile.png" alt="Admin" /> */}
+                        <img src={person.profilePicture ? URL.createObjectURL(person.profilePicture) : "images/sidebar-admin-profile.png"} alt="Admin" />
                         {person.name == " " && person.email == " " ? <h4 className="admin-mail">{person.mobile}</h4>
                             :
                             (<><h4 className="admin-name text-light pt-2">{person.name}</h4>
-                                <p className="admin-mail">Email: {person.email}</p>
-                                <p className="admin-mail">Contact: {person.mobile}</p> </>)
+                                <h6 className="admin-mail">Email: {person.email}</h6>
+                                <h6 >Contact: {person.mobile}</h6> </>)
                         }
                     </div>
                 </div>
