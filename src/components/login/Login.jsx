@@ -80,7 +80,7 @@ export default function Login() {
     };
 
     const handleCreate = () => {
-        navigate("/signup"); // Redirect to signup
+        navigate("/"); // Redirect to signup
     };
 
     const togglePasswordVisibility = () => {

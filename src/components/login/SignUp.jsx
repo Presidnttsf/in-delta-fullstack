@@ -135,7 +135,7 @@ export default function SignUp() {
 
   const handleLogin = () => {
 
-    navigate("/");
+    navigate("/login");
   };
 
   const closeModal = () => {
