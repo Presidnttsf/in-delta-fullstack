@@ -9,6 +9,7 @@ export default function Header(props) {
     const [header, setHeader] = useState('');
     const [faq, setFaq] = useState(false);
     const navigate = useNavigate();
+    let pathName = window.location.pathname;
     const isAuthenticated = useIsAuthenticated();
     // const user = JSON.parse(localStorage.getItem("user")) this will be used when impliment local storage
     const { person, setPerson } = useContext(UserContext);
@@ -88,7 +89,7 @@ export default function Header(props) {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
 
-
+                        {/* open side bar content */}
                         <div className="sidebar d-block d-md-none px-4">
                             <button className="navbar-toggler close-navbar" type="button"
                                 data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -113,7 +114,41 @@ export default function Header(props) {
                                         <p className="admin-mail">{person.mobile}</p>
                                     </div>
                                 </div>
+                                {/* sidebar content */}
+                                <div className="sidebar-tab pt-5">
+                                    <ul>
+                                        <li className={`nav-link mb-4 ${pathName === "/dashboard" ? "active" : ""}`}>
+                                            <Link to="/dashboard" className="d-flex">
+                                                <div className="dash-icon"><img src="images/side-bar/dashboard-icon.svg" alt="Dashboard" className="pe-2" /></div>
+                                                <div className="dash-title"><h6>Dashboard</h6></div>
+                                            </Link>
+                                        </li>
+                                        <li className={`nav-link mb-4 ${pathName === "/myprogram" ? "active" : ""}`}>
+                                            <Link to="/myprogram" className="d-flex">
 
+                                                <div className="dash-icon"><img src="images/side-bar/my-programs-icon.svg" alt="My Programs" className="pe-2" /></div>
+                                                <div className="dash-title"><h6>My Programs</h6></div>
+
+                                            </Link>
+                                        </li>
+                                        <li className={`nav-link mb-4 ${pathName === "/setting" ? "active" : ""}`}>
+                                            <Link to="/setting" className="d-flex">
+
+                                                <div className="dash-icon"><img src="images/side-bar/setting-icon.svg" alt="Settings" className="pe-2" /></div>
+                                                <div className="dash-title"><h6>Settings</h6></div>
+
+                                            </Link>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <nav className="sidebar-menu pt-4 pb-5 ps-3">
+                                    <ul>
+                                        <li><a>About Us</a></li>
+                                        <li><a>How it Works</a></li>
+                                        <li><a>Resources and Articles</a></li>
+                                        <li><Link to="/">Logout</Link></li>
+                                    </ul>
+                                </nav>
                             </div>
                         </div>
                     </div>

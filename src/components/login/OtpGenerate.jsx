@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import Modal from '../dashboard/Modal';
 import { UserContext } from '../../UserContext';
@@ -9,12 +9,50 @@ const OtpGenerate = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [message, setMessage] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null); // State for profile picture
+
   const [formData, setFormData] = useState({
     name: ' ',
     email: ' ',
     mobile: "",
     password: ' ',
   });
+
+  // Apply the no-pointer-events class to the body when the modal is open
+  useEffect(() => {
+    if (showModal) {
+      document.body.classList.add('no-pointer-events');
+    } else {
+      document.body.classList.remove('no-pointer-events');
+    }
+
+    return () => {
+      document.body.classList.remove('no-pointer-events');
+    };
+  }, [showModal]);
+
+
+
+
+
+  const handleImageCapture = (event) => {
+    const file = event.target.files[0];
+
+    if (file) {
+      const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB limit
+      if (file.size > MAX_FILE_SIZE) {
+        alert("File size exceeds 5MB. Please upload a smaller image.");
+        return;
+      }
+
+      const previewURL = URL.createObjectURL(file); // Generate Blob URL
+
+      setProfilePicture(previewURL);
+      setFormData((prev) => ({ ...prev, profilePicture: file })); // Store file object in formData
+    }
+  };
+
+
 
 
   function handleChange(e) {
@@ -31,7 +69,16 @@ const OtpGenerate = () => {
 
   function handleSendOtp(e) {
 
-    const { name, email, mobile, password } = formData;
+    const { name, email, mobile, password, profilePicture } = formData;
+
+    if (!profilePicture) {
+      setShowModal(true)
+      setMessage(`Profile Photo  required`)
+      return;
+    }
+
+
+
     if (!mobile) {
       setShowModal(true)
       setMessage(`Mobile number required`)
@@ -44,10 +91,13 @@ const OtpGenerate = () => {
       return;
     }
 
-    const userData = { name, email, mobile, password };
+
+
+
+    const userData = { name, email, mobile, password, profilePicture };
     try {
       // localStorage.setItem('user', JSON.stringify(userData));
-      console.log("userdata", userData)
+      // console.log("userdata", userData)
 
       setPerson(userData);
 
@@ -108,6 +158,33 @@ const OtpGenerate = () => {
               <h6 className="log-para pb-4">
                 Lorem ipsum is simple dummy text that can help.
               </h6>
+              {/* Upload Profile Picture */}
+              <div className="profile-picture-section">
+                <label htmlFor="profilePicture">
+                  {profilePicture ? (
+                    <img
+                      src={profilePicture}
+                      alt="Profile"
+                      style={{ width: '100px', height: '100px', borderRadius: '50%' }}
+                    />
+                  ) : (
+                    <div style={{ border: '1px dashed red', width: '100px', height: '100px', borderRadius: '50%', textAlign: 'center', lineHeight: '100px', marginBottom: "10px" }}>
+                      Add Photo
+                    </div>
+                  )}
+                </label>
+                <input
+                  type="file"
+                  id="profilePicture"
+                  accept="image/*"
+                  capture="environment"
+                  style={{ display: 'none' }}
+                  onChange={handleImageCapture}
+                />
+              </div>
+
+
+
 
               {/* Name */}
               <div className="log-group">
