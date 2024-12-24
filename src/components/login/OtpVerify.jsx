@@ -37,8 +37,14 @@ const OtpVerify = () => {
       inputRefs.current[index + 1]?.focus();
     }
 
-
   };
+  // Handle backspace: Move focus back to the previous input field
+  const handleKeyDown = (index, event) => {
+    if (event.key === 'Backspace' && index > 0 && userOtp[index] === '') {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
 
   const handleInputHover = (index) => {
     if (index >= 0) {
@@ -133,6 +139,7 @@ const OtpVerify = () => {
                           onMouseEnter={() => handleInputHover(index)}
                           onFocus={() => handleInputHover(index)}
                           onChange={(e) => handleInputChange(index, e.target.value)}
+                          onKeyDown={(e) => handleKeyDown(index, e)} // Handle key presses like backspace
                         />
                       </div>
                     </div>
