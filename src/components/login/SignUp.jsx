@@ -126,7 +126,7 @@ export default function SignUp() {
       setShowModal(true);
 
       // Redirect to login after a delay
-      setTimeout(() => navigate('/'), 1000);
+      setTimeout(() => navigate('/login'), 1000);
     } catch (error) {
       setMessage("An error occurred during sign-up. Please try again.");
       setShowModal(true);
