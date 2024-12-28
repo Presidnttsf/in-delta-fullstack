@@ -1,16 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
+import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Modal from '../dashboard/Modal';
 import { UserContext } from '../../UserContext';
 
-
 export default function SignUp() {
 
-  const { person, setPerson } = useContext(UserContext);
   const [showPassword, setShowPassword] = useState(false);  // State to toggle password visibility
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);  // State to toggle password visibility
   const [profilePicture, setProfilePicture] = useState(null); // State for profile picture
-
+  const { setPerson, setToken } = useContext(UserContext)
 
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
@@ -25,6 +24,27 @@ export default function SignUp() {
 
 
   });
+
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get("http://localhost:5000/backend/userdb/getusers");
+        setPerson(response.data);
+
+      } catch (error) {
+
+        setShowModal(true)
+        setMessage(error)
+
+      }
+    };
+    fetchUserData();
+
+  }, [setPerson])
+
+
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -45,16 +65,16 @@ export default function SignUp() {
       const previewURL = URL.createObjectURL(file); // Generate Blob URL
 
       setProfilePicture(previewURL);
-      setFormData((prev) => ({ ...prev, profilePicture: file })); // Store file object in formData
+
     }
   };
 
 
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
-    const { name, email, mobile, password, confirmPassword, profilePicture } = formData;
+    const { name, email, mobile, password, confirmPassword } = formData;
 
     if (!name) {
       setMessage("Name cannot be empty!");
@@ -75,15 +95,6 @@ export default function SignUp() {
       return;
     }
 
-
-    if (!formData.profilePicture) {
-      setMessage("Profile picture required!");
-      setShowModal(true);
-      return;
-    }
-
-
-
     if (!mobile) {
       setMessage("Mobile cannot be empty!");
       setShowModal(true);
@@ -103,11 +114,6 @@ export default function SignUp() {
       return;
     }
 
-    if (password !== confirmPassword) {
-      setMessage("Password mismatch!!!");
-      setShowModal(true);
-      return;
-    }
 
     if (password.length < 6) {
       setMessage("Password should be greater than 6 digit")
@@ -116,19 +122,37 @@ export default function SignUp() {
     }
 
 
-    const userData = { name, email, password, mobile, profilePicture };
-    try {
-      // localStorage.setItem('user', JSON.stringify(userData));
-      console.log("userdata", userData.profilePicture)
-      setPerson(userData);
-
-      setMessage("Sign-up successful! Please log in.");
+    if (password !== confirmPassword) {
+      setMessage("Password mismatch!!!");
       setShowModal(true);
+      return;
+    }
 
-      // Redirect to login after a delay
-      setTimeout(() => navigate('/login'), 1000);
+    // Prepare form data for submission (excluding profilePicture)
+    const formDataToSend = {
+      name,
+      email,
+      mobile,
+      password,
+      confirmPassword
+    };
+
+
+
+
+    try {
+      const response = await axios.post(
+        'http://localhost:5000/backend/userdb/AddUser', formDataToSend);
+
+      if (response.status === 201) {
+        setMessage("Sign-up successful! Please log in.");
+        setShowModal(true);
+
+        // Redirect to login after a delay
+        setTimeout(() => navigate('/login'), 1000);
+      }
     } catch (error) {
-      setMessage("An error occurred during sign-up. Please try again.");
+      setMessage(error.response?.data?.message || "An error occurred during sign-up.");
       setShowModal(true);
     }
   };
@@ -221,17 +245,17 @@ export default function SignUp() {
               {/* Upload Profile Picture */}
               <div className="profile-picture-section">
                 <label htmlFor="profilePicture">
-                  {profilePicture ? (
+                  {profilePicture ?
                     <img
-                      src={profilePicture}
+                      src={profilePicture} // Generate a preview URL dynamically
                       alt="Profile"
                       style={{ width: '100px', height: '100px', borderRadius: '50%' }}
                     />
-                  ) : (
-                    <div style={{ border: '1px dashed red', width: '100px', height: '100px', borderRadius: '50%', textAlign: 'center', lineHeight: '100px', marginBottom: "10px" }}>
-                      Add Photo
-                    </div>
-                  )}
+                    : (
+                      <div style={{ border: '1px dashed red', width: '100px', height: '100px', borderRadius: '50%', textAlign: 'center', lineHeight: '100px', marginBottom: "10px" }}>
+                        Add Photo
+                      </div>
+                    )}
                 </label>
                 <input
                   type="file"

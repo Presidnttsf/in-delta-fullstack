@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Modal from '../dashboard/Modal';
 import { UserContext } from '../../UserContext';
 import { Link } from 'react-router-dom';
+import axios from "axios";
 
 
 export default function Login() {
@@ -16,11 +17,9 @@ export default function Login() {
 
     });
     // const user = JSON.parse(localStorage.getItem("user")); //when using local storage
-    const { person } = useContext(UserContext)
+    const { setPerson, setToken } = useContext(UserContext)
 
     const [showPassword, setShowPassword] = useState(false);  // State to toggle password visibility
-
-
 
 
     const handleInputChange = (e) => {
@@ -29,50 +28,41 @@ export default function Login() {
     };
 
 
-    const handleLogin = (event) => {
+    const handleLogin = async (event) => {
         event.preventDefault();
-        const { email, password } = formData;
 
-        if (!email) {
-            setMessage("Email cannot be empty!");
-            setShowModal(true);
-            return;
-        }
+        try {
+            // Make an API call to the login endpoint
+            const response = await axios.post('http://localhost:5000/backend/userdb/LoginUser', formData);
+            console.log("check formd", response)
+            if (response.data.success) {
+                setMessage("Login successful!");
+                setShowModal(true);
 
-        const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-        if (!emailRegex.test(email)) {
-            setMessage("Please enter a valid email address.");
-            setShowModal(true);
-            return;
-        }
+                // Update the user context with the logged-in user data
+                setToken(response.data.token); // Store the token in UserContext
 
-        if (!password) {
-            setMessage("Password cannot be empty!");
-            setShowModal(true);
-            return;
-        }
+                const userResponse = await axios.get('http://localhost:5000/backend/userdb/GetUserById', {
+                    headers: {
+                        Authorization: `Bearer ${response.data.token}`, // Pass the token in the Authorization header
+                    },
+                });
 
-        if (!person) {
-            setMessage("No user found. Please create an account!");
-            setShowModal(true);
-            return;
-        }
-
-
-
-        if (email === person.email && password === person.password) {
-            setMessage("Login successful!");
-            setShowModal(true);
-            navigate("/dashboard");
-        } else {
-            setMessage("Invalid credentials!");
+                console.log("check User resp", userResponse)
+                setPerson(userResponse.data)
+                // Redirect to dashboard
+                navigate('/dashboard');
+            } else {
+                setMessage(response.data.message);
+                setShowModal(true);
+            }
+        } catch (error) {
+            console.error("Error during login:", error);
+            setMessage("Login failed. Please check your credentials and try again.");
             setShowModal(true);
         }
     };
-    function handleOtp() {
-        navigate("/otpgenerate")
 
-    }
 
 
     const closeModal = () => {

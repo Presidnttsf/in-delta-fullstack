@@ -23,14 +23,17 @@ export const Check = () => {
   }, []); // Empty dependency array means this runs once after the component mounts
 
   return (
-    <div>
+    <div style={{ textAlign: 'center' }}>
       <h1>This is Check Component</h1>
       {loading && <p>Loading...</p>}
       {error && <h1 style={{ color: 'red' }}>Error: {error}</h1>}
       {!loading && !error && (
         <ul>
-          {users.map((user) => (
-            <li key={user.id}>{user.name}</li> // Assuming each user object has `id` and `name` properties
+          {users.map((user, index) => (
+            <div key={index} style={{ textAlign: 'center', background: "aqua" }} >
+              <li > {index + 1}: {user.name}</li>
+              <p > {user.email}</p>
+            </div>
           ))}
         </ul>
       )}

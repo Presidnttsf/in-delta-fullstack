@@ -27,8 +27,8 @@ export default function LeftSideBar() {
             <div className="sidebar-content">
                 <div className="sidebar-admin pt-5 pb-md-4">
                     <div className="admin-profile text-center pt-3">
-                        {/* <img src="images/sidebar-admin-profile.png" alt="Admin" /> */}
-                        <img src={person.profilePicture ? URL.createObjectURL(person.profilePicture) : "images/sidebar-admin-profile.png"} alt="Admin" className="admin-border-img" />
+                        <img src="images/sidebar-admin-profile.png" alt="Admin" />
+                        {/* <img src={person.profilePicture ? person.profilePicture : "images/sidebar-admin-profile.png"} alt="Admin" className="admin-border-img" /> */}
 
                         {/* if login with otp */}
                         {person.name == " " && person.email == " " ? <p className="admin-mail">{person.mobile}</p>
