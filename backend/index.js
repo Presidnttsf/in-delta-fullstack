@@ -1,6 +1,6 @@
+//this is all required prerequsite
 require("dotenv").config();
 const { ObjectId, MongoClient } = require("mongodb"); // Import ObjectId from the MongoDB library
-
 var Express = require("express");
 var cors = require("cors");
 const multer = require('multer');
@@ -10,7 +10,7 @@ const bcrypt = require("bcrypt");
 const app = Express();
 app.use(cors());
 
-
+//port and connections
 const PORT = process.env.port || 5000;
 const CONNECTION_STRING = process.env.MONGO_CONNECTION_STRING;
 const JWT_SECRET = process.env.JWT_SECRET;
@@ -44,6 +44,8 @@ app.listen(PORT, async () => {
 app.use(Express.json());
 app.use("/uploads", Express.static("backend/uploads"));
 
+
+//to get all users or read
 app.get("/backend/userdb/GetUsers", async (req, res) => {
   if (!database) {
     return res.status(500).send({ message: "Database connection not established" });
@@ -81,6 +83,7 @@ app.get("/backend/userdb/GetUsers", async (req, res) => {
   }
 });
 
+//to get signle user to show details
 app.get("/backend/userdb/GetUserById", async (req, res) => {
   if (!database) {
     return res.status(500).send({ message: "Database connection not established" });
@@ -132,7 +135,8 @@ app.post("/backend/userdb/AddUser", async (req, res) => {
 
   try {
     // Check if email already exists
-    const existingUser = await database.collection("users").findOne({ email });
+    const normalizedEmail = email.toLowerCase();
+    const existingUser = await database.collection("users").findOne({ email: normalizedEmail });
     if (existingUser) {
       return res.status(400).send({ success: false, message: "User with this email already exists." });
     }
@@ -171,7 +175,10 @@ app.post("/backend/userdb/LoginUser", async (req, res) => {
   }
 
   try {
-    const user = await database.collection("users").findOne({ email });
+    // Normalize email to lowercase
+    const normalizedEmail = email.toLowerCase();
+
+    const user = await database.collection("users").findOne({ email: normalizedEmail });
     if (!user) {
       return res.status(404).send({ success: false, message: "User not found." });
     }
@@ -207,4 +214,109 @@ const authenticateToken = (req, res, next) => {
 // Example Protected Route
 app.get("/backend/userdb/ProtectedRoute", authenticateToken, (req, res) => {
   res.status(200).send({ success: true, message: "Welcome to the protected route!" });
+});
+
+
+//to edite user profile
+//PUT api to edit user details
+
+app.put("/backend/userdb/UpdateUser", async (req, res) => {
+  console.log("PUT method running");
+
+  if (!database) {
+    console.error("Database connection not established");
+    return res.status(500).send({ success: false, message: "Database connection not established" });
+  }
+
+  const { userId, name, email, mobile, password, confirmPassword } = req.body;
+
+  if (!userId) {
+    return res.status(400).send({ success: false, message: "User ID is required to update user details." });
+  }
+  const updateData = {};
+  try {
+    // Validate email if provided
+    if (email) {
+      const normalizedEmail = email.toLowerCase();
+      const existingUser = await database.collection("users").findOne({ email: normalizedEmail, _id: { $ne: new ObjectId(userId) } });
+      if (existingUser) {
+        return res.status(400).send({ success: false, message: "Another user with this email already exists." });
+      }
+      updateData.email = normalizedEmail;
+    }
+
+    // Check if passwords match (if provided)
+    if (password || confirmPassword) {
+      if (!password || !confirmPassword || password !== confirmPassword) {
+        return res.status(400).send({ success: false, message: "Passwords do not match or are missing." });
+      }
+    }
+
+    // Hash the new password if updating
+
+    if (name) updateData.name = name;
+    if (email) updateData.email = email.toLowerCase(); // Normalize email
+    if (mobile) updateData.mobile = mobile;
+    if (password) {
+      const hashedPassword = await bcrypt.hash(password, 10);
+      updateData.password = hashedPassword;
+      updateData.confirmPassword = hashedPassword;
+    }
+
+    // Check if there's anything to update
+    if (Object.keys(updateData).length === 0) {
+      return res.status(400).send({ success: false, message: "No fields provided for update." });
+    }
+
+    // Perform the update
+    const result = await database
+      .collection("users")
+      .updateOne({ _id: new ObjectId(userId) }, { $set: updateData });
+
+    if (result.matchedCount === 0) {
+      return res.status(404).send({ success: false, message: "User not found." });
+    }
+
+    console.log("User updated:", result);
+    res.status(200).send({ success: true, message: "User updated successfully." });
+  } catch (error) {
+    console.error("Error updating user:", error);
+    res.status(500).send({ success: false, message: "Internal Server Error", error: error.message });
+  }
+});
+
+
+// Delete User API
+app.delete("/backend/userdb/DeleteUser/:id", async (req, res) => {
+  console.log("DELETE method running");
+
+  // Check database connection
+  if (!database) {
+    console.error("Database connection not established");
+    return res.status(500).send({ success: false, message: "Database connection not established" });
+  }
+
+  const userId = req.params.id; // Extract the user ID from the route parameters
+
+  if (!userId) {
+    return res.status(400).send({ success: false, message: "User ID is required to delete a user." });
+  }
+
+  try {
+    // Convert the userId string to an ObjectId
+    const filter = { _id: new ObjectId(userId) };
+
+    // Delete the user from the "users" collection
+    const result = await database.collection("users").deleteOne(filter);
+
+    if (result.deletedCount === 0) {
+      return res.status(404).send({ success: false, message: "User not found." });
+    }
+
+    console.log("User deleted:", result);
+    res.status(200).send({ success: true, message: "User deleted successfully." });
+  } catch (error) {
+    console.error("Error deleting user:", error);
+    res.status(500).send({ success: false, message: "Internal Server Error", error: error.message });
+  }
 });

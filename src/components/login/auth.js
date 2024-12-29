@@ -5,5 +5,9 @@ export const useIsAuthenticated = () => {
   // const user = localStorage.getItem("user") when using local storage
   const user = useContext(UserContext);
 
-  return !!user;
+  // console.log("userfrom auth", user)
+  return !!user.token;
 }
+
+
+// !!user.token

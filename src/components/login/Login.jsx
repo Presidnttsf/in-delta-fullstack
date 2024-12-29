@@ -12,7 +12,7 @@ export default function Login() {
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        email: '',
+        email: "",
         password: '',
 
     });
@@ -31,9 +31,15 @@ export default function Login() {
     const handleLogin = async (event) => {
         event.preventDefault();
 
+        // Normalize email to lowercase
+        const formDataToSend = {
+            ...formData,
+            email: formData.email.toLowerCase(),
+        };
+
         try {
             // Make an API call to the login endpoint
-            const response = await axios.post('http://localhost:5000/backend/userdb/LoginUser', formData);
+            const response = await axios.post('http://localhost:5000/backend/userdb/LoginUser', formDataToSend);
             console.log("check formd", response)
             if (response.data.success) {
                 setMessage("Login successful!");

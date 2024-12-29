@@ -9,7 +9,7 @@ export default function SignUp() {
   const [showPassword, setShowPassword] = useState(false);  // State to toggle password visibility
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);  // State to toggle password visibility
   const [profilePicture, setProfilePicture] = useState(null); // State for profile picture
-  const { setPerson, setToken } = useContext(UserContext)
+  const { setPerson, setToken, person } = useContext(UserContext)
 
   const navigate = useNavigate();
   const [message, setMessage] = useState("");
@@ -21,6 +21,7 @@ export default function SignUp() {
     mobile: "",
     password: '',
     confirmPassword: '',
+    profilePicture: null
 
 
   });
@@ -65,7 +66,7 @@ export default function SignUp() {
       const previewURL = URL.createObjectURL(file); // Generate Blob URL
 
       setProfilePicture(previewURL);
-
+      // Update useContext with profile picture
     }
   };
 
@@ -74,7 +75,7 @@ export default function SignUp() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    const { name, email, mobile, password, confirmPassword } = formData;
+    const { name, email, mobile, password, confirmPassword, profilePicture } = formData;
 
     if (!name) {
       setMessage("Name cannot be empty!");
@@ -131,12 +132,12 @@ export default function SignUp() {
     // Prepare form data for submission (excluding profilePicture)
     const formDataToSend = {
       name,
-      email,
+      email: email.toLowerCase(),
       mobile,
       password,
       confirmPassword
     };
-
+    console.log("personfromsignup", person.profilePicture)
 
 
 
