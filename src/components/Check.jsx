@@ -138,14 +138,24 @@ export const Check = () => {
                     />
                     Delete
                   </button>
+                  <button style={styles.editButton}>
+                    <img
+                      src="https://img.icons8.com/ios-glyphs/20/008000/plus-math.png" // Updated to "add" icon
+                      alt="add"
+                      style={styles.icon}
+                    />
+                    Add
+                  </button>
+
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
-      )}
+      )
+      }
 
-    </div>
+    </div >
   );
 };
 
@@ -196,6 +206,7 @@ const styles = {
     borderRadius: '4px',
     display: 'inline-flex',
     alignItems: 'center',
+    marginLeft: "5px"
   },
   deleteButton: {
     backgroundColor: '#f44336',
